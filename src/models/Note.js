@@ -6,14 +6,39 @@ const NoteSchema = new Schema(
       type: String,
       required: true
     },
-    description: {
+    title: {
       type: String,
       required: true
     },
-    user: {
+    cedula: {
       type: String,
       required: true
+    },
+    correo: {
+      type: String,
+      required: true
+    },
+    destino: {
+      type: String,
+      required: true
+    },
+    direccion: {
+      type: String,
+      required: true
+    },
+    telefono: {
+      type: Number,
+      required: true
+    },
+    temperatura: {
+      type: Number,
+      required: true
+    },
+    description: {
+      type: String,
+      required: false
     }
+    
   },
   {
     timestamps: true

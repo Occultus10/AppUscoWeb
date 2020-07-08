@@ -4,8 +4,13 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title d-flex justify-content-between align-items-center">
-          {{ title }} <a href="/notes/edit/{{_id}}"><i class="fas fa-edit"></i></a>
+          <!--name is function in the university--><b>{{ name }}</b> <a href="/notes/edit/{{_id}}"><i class="fas fa-edit"></i></a>
         </h4>
+        <!--title is username-->
+        <p>{{title}}</p>
+        <p>{{correo}}</p>
+        <p>{{temperatura}}</p>
+        <p>{{direccion}}</p>
         <p>{{ description }} </p>
         <!-- DELETE REQUEST -->
         <form action="/notes/delete/{{_id}}?_method=DELETE" method="POST">
@@ -18,7 +23,7 @@
   {{else}}
   <div class="card mx-auto">
     <div class="card-body">
-      <h1>Hola {{user.name}}</h1>
+      <h1>Hola, {{user.name}}</h1>
       <p clsss="lead">No hay usuarios registrados aún.</p>
       <a href="/notes/add" class="btn btn-success btn-block">Registra uno!</a>
     </div>

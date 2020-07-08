@@ -8,23 +8,51 @@ notesCtrl.renderNoteForm = (req, res) => {
 };
 
 notesCtrl.createNewNote = async (req, res) => {
-  const { title, description } = req.body;
+  const { title,name,cedula, correo,destino,direccion,telefono,temperatura } = req.body;
   const errors = [];
   if (!title) {
-    errors.push({ text: "Please Write a Title." });
+    errors.push({ text: "Por favor escriba un nombre de usuario." });
   }
-  if (!description) {
-    errors.push({ text: "Please Write a Description" });
+  if (!name) {
+    errors.push({ text: "Por favor seleccione una función." });
   }
+  if (!cedula) {
+    errors.push({ text: "Por favor escriba un numero de identificación" });
+  }
+  if (!correo) {
+    errors.push({ text: "Por favor escriba un correo." });
+  }
+  if (!destino) {
+    errors.push({ text: "Por favor escriba el lugar donde se dirige el usuario." });
+  }
+  if (!direccion) {
+    errors.push({ text: "Por favor escriba la dirección de residencia." });
+  }
+  if (!telefono) {
+    errors.push({ text: "Por favor escriba un telefono de contacto" });
+  }
+  if (!temperatura) {
+    errors.push({ text: "Por favor escriba la temperatura del usuario." });
+  }
+  /*if (!description) {
+    errors.push({ text: "Por favor escriba una descripción." });
+  }*/
   if (errors.length > 0) {
     res.render("notes/new-note", {
       errors,
       title,
-      description,
+      name,
+      cedula,
+      correo,
+      destino,
+      direccion,
+      telefono,
+      temperatura,
+      
     });
   } else {
-    const newNote = new Note({ title, description });
-    newNote.user = req.user.id;
+    const newNote = new Note({ title, name, cedula, correo, destino, direccion, telefono, temperatura });
+    
     await newNote.save();
     req.flash("success_msg", "Usuario añadido exitósamente.");
     res.redirect("/notes");
@@ -32,7 +60,7 @@ notesCtrl.createNewNote = async (req, res) => {
 };
 
 notesCtrl.renderNotes = async (req, res) => {
-  const notes = await Note.find({ user: req.user.id })
+  const notes = await Note.find()
     .sort({ date: "desc" })
     .lean();
   res.render("notes/all-notes", { notes });

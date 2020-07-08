@@ -4,16 +4,42 @@
       <h3>Nuevo usuario</h3>
     </div>
     <div class="card-body">
+      
       <form action="/notes/new-note" method="POST">
-        <div class="form-group">
-          <input type="text" name="title" class="form-control" placeholder="Title" autofocus/>
+      <div class="form-group">
+        <select type="text" name="name" placeholder="">
+          <option>Estudiante</option>
+          <option>Administrativo</option>
+          <option>Otro</option>
+        </select>
         </div>
         <div class="form-group">
-          <textarea name="description" class="form-control" placeholder="Description"></textarea>
+          <input type="text" name="title" class="form-control" placeholder="Nombre" autofocus/>
+        </div>
+        <div class="form-group">
+          <input type="text" name="cedula" class="form-control" placeholder="Cédula" autofocus/>
+        </div>
+        <div class="form-group">
+          <input type="email" name="correo" class="form-control" placeholder="Correo" autofocus/>
+        </div>
+        <div class="form-group">
+          <input type="text" name="destino" class="form-control" placeholder="Destino" autofocus/>
+        </div>
+        <div class="form-group">
+          <input type="text" name="direccion" class="form-control" placeholder="Dir residencia" autofocus/>
+        </div>
+        <div class="form-group">
+          <input type="text" name="telefono" class="form-control" placeholder="Teléfono" autofocus/>
+        </div>
+        <div class="form-group">
+          <input type="text" name="temperatura" class="form-control" placeholder="Temperatura" autofocus/>
+        </div>
+        <div class="form-group">
+          <textarea name="description" class="form-control" placeholder="Escriba alguna anotación..."></textarea>
         </div>
         <div class="form-group">
           <button class="btn btn-primary btn-block" type="submit">
-            Save
+            Guardar
           </button>
         </div>
       </form>
