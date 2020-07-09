@@ -2,9 +2,10 @@ const notesCtrl = {};
 
 // Models
 const Note = require("../models/Note");
+const User = require('../models/User');
 
 notesCtrl.renderNoteForm = (req, res) => {
-  res.render("notes/new-note");
+  res.render("notes/new-note"); //ruta archivo .hbs
 };
 
 notesCtrl.createNewNote = async (req, res) => {
