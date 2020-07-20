@@ -17,6 +17,7 @@
     "express": "^4.17.1",
     "express-handlebars": "^4.0.6",
     "express-session": "^1.17.1",
+    "express-validator": "^6.6.0",
     "method-override": "^3.0.0",
     "mongoose": "^5.9.22",
     "morgan": "^1.10.0",
