@@ -23,8 +23,8 @@ router.post("/notes/new-note", isAuthenticated, createNewNote);
 router.get("/notes", isAuthenticated, renderNotes);
 
 // Edit Notes
-router.get("/notes/edit/:id", isAuthenticated, renderEditForm);
 
+router.get("/notes/edit/:id", isAuthenticated, renderEditForm);
 router.put("/notes/edit-note/:id", isAuthenticated, updateNote);
 
 // Delete Notes

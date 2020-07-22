@@ -1,0 +1,45 @@
+
+<table class="table table-hover table-dark">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nombres - Apellidos</th>
+      <th scope="col">Cedula</th>
+      <th scope="col">Telefono</th>
+      <th scope="col">Temperatura</th>
+      <th scope="col">Genero</th>
+      <th scope="col">lugar de visita</th>
+      <th scope="col">Rol Visitante</th>
+      <th scope="col">Fecha - Hora de entrada</th>
+      <th scope="col">nota</th> 
+    </tr>
+  </thead>
+
+  <tbody>
+    {{#each Visitas}} 
+    <tr>
+      <th scope="row">1</th>
+
+      <td>{{nombres}}</td>
+      <td>{{cedula}}</td>
+      <td>{{telefono}}</td>
+      <td>{{temperatura}}</td>
+      <td>{{genero}}</td>
+      <td>{{lugarVisita}}</td>
+      <td>{{Rol_visitante}}</td>
+      <td>{{date}}</td>
+      <td>{{nota}}</td>
+
+      <td>
+        <a href="/visitas/actualizarVisita/{{_id}}"><i class=" btn btn-primary btn-block btn-sm fas fa-edit"></i></a> 
+      <br/> 
+       <form action="/notes/delete/{{_id}}?_method=DELETE" method="POST">
+          <input type="hidden" name="_method" value="DELETE">
+          <button type="submit" class="btn btn-danger btn-block btn-sm">Eliminar</button>
+        </form>
+        </td>
+    </tr>
+    
+     {{/each}}
+  </tbody>
+</table>
