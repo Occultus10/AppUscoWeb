@@ -4,14 +4,16 @@ const router = express.Router();
 const pdfMake = require("../helpers/pdfmake");
 const vfsFonts = require("../helpers/vfs_fonts");
 const { isAuthenticated } = require("../helpers/auth");
+const { adminAuth } = require("../helpers/userAdmin")
 
 const VisitaSaliente = require("../models/VisitaSaliente");
-const { text } = require('express');
+
 
 pdfMake.vfs = vfsFonts.pdfMake.vfs;
 
-router.get("/reportes/crearReporte", isAuthenticated, (req, res) => {
+router.get("/reportes/crearReporte", isAuthenticated, adminAuth, (req, res) => {
     res.render('reportes/crear_reporte');
+
 });
 
 router.post('/reportes/crarReporte', async (req, res, next) => {
@@ -39,26 +41,31 @@ router.post('/reportes/crarReporte', async (req, res, next) => {
     for await (const doc of Visitas) {
         reportes.push(doc);
     }
-    
+
     console.log('reportesArray: ', reportes.length);
-    
-    const pdfdata =[]; 
+
+    const pdfdata = [];
     pdfdata.push([
-        {text:'Nombres'},
-        {text:'Cedula'},
-        {text:'Telefono'},
+        { text: 'Nombres' },
+        { text: 'Cedula' },
+        { text: 'Telefono' },
+        { text: 'Genero' },
+        { text: 'Lugar de Visita' },
+        { text: 'Hora entrada' },
+        { text: 'Hora salida' }
+
     ]);
 
-    for(i = 0; i < reportes.length; i++) {
+    for (i = 0; i < reportes.length; i++) {
         console.log('registro ', i);
         pdfdata.push([
-            {text: reportes[i].nombres},
-            {text: reportes[i].cedula},
-            {text: reportes[i].telefono}
+            { text: reportes[i].nombres },
+            { text: reportes[i].cedula },
+            { text: reportes[i].telefono }
         ]);
-        console.log('fila: '+ i , pdfdata);
+        console.log('fila: ' + i, pdfdata);
     }
-    console.log(pdfdata.length); 
+    console.log(pdfdata.length);
 
 
 
@@ -82,32 +89,32 @@ router.post('/reportes/crarReporte', async (req, res, next) => {
             {text:'Hora salida'}
           ]);
            */
-         var documentDefinition = {
-              content: [
-                  { text: 'Tables', style: 'header' },
-                  'Official documentation is in progress, this document is just a glimpse of what is possible with pdfmake and its layout engine.',
-                  { text: 'A simple table (no headers, no width specified, no spans, no styling)', style: 'subheader' },
-                  'The following table has nothing more than a body array',
-                  {
-                      style: 'tableExample',
-                      table: {
-                          body: pdfdata
-                      }
-                  }
-              ]
-          };
-      
-          const pdfDoc = pdfMake.createPdf(documentDefinition);
-          pdfDoc.getBase64((data) => {
-              res.writeHead(200,
-                  {
-                      'Content-Type': 'application/pdf',
-                      'Content-Disposition': 'attachment;filename="filename.pdf"'
-                  });
-      
-              const download = Buffer.from(data.toString('utf-8'), 'base64');
-              res.end(download);
-          });
+    var documentDefinition = {
+        content: [
+            { text: 'Tables', style: 'header' },
+            'Official documentation is in progress, this document is just a glimpse of what is possible with pdfmake and its layout engine.',
+            { text: 'A simple table (no headers, no width specified, no spans, no styling)', style: 'subheader' },
+            'The following table has nothing more than a body array',
+            {
+                style: 'tableExample',
+                table: {
+                    body: pdfdata
+                }
+            }
+        ]
+    };
+
+    const pdfDoc = pdfMake.createPdf(documentDefinition);
+    pdfDoc.getBase64((data) => {
+        res.writeHead(200,
+            {
+                'Content-Type': 'application/pdf',
+                'Content-Disposition': 'attachment;filename="filename.pdf"'
+            });
+
+        const download = Buffer.from(data.toString('utf-8'), 'base64');
+        res.end(download);
+    });
 });
 
 
