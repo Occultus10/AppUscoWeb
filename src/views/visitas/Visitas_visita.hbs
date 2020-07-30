@@ -1,35 +1,40 @@
 
-<table class="table table-hover table-dark">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
+<div class="container">
+<form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2 rounded" type="search" placeholder="Buscar por cédula">
+      <button class="btn btn-primary my-2 my-sm-0 rounded" type="submit">Buscar</button>
+    </form>
+</div>
+<br>
+<br>
+<table class="table table-striped rounded" aria-haspopup="true" >
+  <thead  class="thead-white text-black">
+      
       <th scope="col">Nombres - Apellidos</th>
-      <th scope="col">Cedula</th>
-      <th scope="col">Telefono</th>
+      <th scope="col">Cédula</th>
+      <th scope="col">Teléfono</th>
       <th scope="col">Temperatura</th>
-      <th scope="col">Genero</th>
-      <th scope="col">lugar de visita</th>
+      <th scope="col">Género</th>
+      <th scope="col">Lugar de visita</th>
       <th scope="col">Rol Visitante</th>
       <th scope="col">Fecha - Hora de entrada</th>
-      <th scope="col">nota</th> 
+      <th scope="col">Nota</th> 
+      <th scope="col">Acción</th>
     </tr>
   </thead>
 
-  <tbody>
+  <tbody class="tbody-white">
     {{#each Visitas}} 
     <tr>
-      <th scope="row">1</th>
-
       <td>{{nombres}}</td>
       <td>{{cedula}}</td>
       <td>{{telefono}}</td>
-      <td>{{temperatura}}</td>
+      <td>{{temperatura}} grados</td>
       <td>{{genero}}</td>
       <td>{{lugarVisita}}</td>
       <td>{{Rol_visitante}}</td>
       <td>{{date}}</td>
       <td>{{nota}}</td>
-
       <td>
         <a href="/visitas/actualizarVisita/{{_id}}"><i class=" btn btn-primary btn-block btn-sm fas fa-edit"></i></a> 
       <br/> 
@@ -43,3 +48,16 @@
      {{/each}}
   </tbody>
 </table>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script>
+  
+  //Cuando la página esté cargada completamente
+  $(document).ready(function(){
+    //Cada 10 segundos (10000 milisegundos) se ejecutará la función refrescar
+    setTimeout(refrescar, 300000);
+  });
+  function refrescar(){
+    //Actualiza la página
+    location.reload();
+  }
+</script>
