@@ -43,7 +43,7 @@ visitasCtrl.salidaVisitas = async (req, res) => {
 	console.log(visita);
 	await visitaSaliente.save();
 	await Visita.findByIdAndDelete(visita._id);
-	console.log('borado');
+	res.redirect("/visitas/Visitas");
 
 
 

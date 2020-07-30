@@ -16,7 +16,7 @@ router.get("/reportes/crearReporte", isAuthenticated, adminAuth, (req, res) => {
 
 });
 
-router.post('/reportes/crarReporte', async (req, res, next) => {
+router.post('/reportes/crearReporte', async (req, res, next) => {
     //res.send('PDF');
 
 
@@ -61,11 +61,17 @@ router.post('/reportes/crarReporte', async (req, res, next) => {
         pdfdata.push([
             { text: reportes[i].nombres },
             { text: reportes[i].cedula },
-            { text: reportes[i].telefono }
+            { text: reportes[i].telefono },
+            { text: reportes[i].lugarVisita },
+            { text: reportes[i].direccion },
+            { text: reportes[i].dateEntrada },
+            { text: reportes[i].dateSalida },
         ]);
         console.log('fila: ' + i, pdfdata);
+        
     }
     console.log(pdfdata.length);
+    console.log(reportes[0].dateSalida)
 
 
 
@@ -91,10 +97,11 @@ router.post('/reportes/crarReporte', async (req, res, next) => {
            */
     var documentDefinition = {
         content: [
-            { text: 'Tables', style: 'header' },
-            'Official documentation is in progress, this document is just a glimpse of what is possible with pdfmake and its layout engine.',
-            { text: 'A simple table (no headers, no width specified, no spans, no styling)', style: 'subheader' },
-            'The following table has nothing more than a body array',
+            {text:'REPORTE UNIVERSIDAD SURCOLOMBIANA' ,style: 'header ' },
+            
+            
+            { text:'La siguiente tabla contiene el ingreso y salida de las personas a la universidad Surcolombiana.', style: 'subheader' },
+    
             {
                 style: 'tableExample',
                 table: {
