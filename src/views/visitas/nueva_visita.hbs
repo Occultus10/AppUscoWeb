@@ -1,121 +1,110 @@
-FORMULARIO AQUI
+
  {{#if errors }}
               {{#each errors }}
                 <p class="alert alert-danger">{{ this.msg }}</p>
               {{/each}}
             {{/if}}
 <div class="Container ">                
-    <div class="jumbotron p-4 p-md-5 text-white rounded bg-dark">
+    <div style="background-color:#4D626C"class="jumbotron p-4 p-md-5  rounded ">
         <div class="row ">
-            <div class="col-md-4 order-md-2 mb-4">
+            <div class="col-md-4 order-md-2 mb-4 ">
                 <h4 class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="text-muted">Pico y Cedula para la ciudad de Neiva </span>
-                    <span class="badge badge-secondary badge-pill">Fecha aqui.. </span>
+                    <span class="text-white"><strong>Pico y Cedula para la ciudad de Neiva </strong></span>
                 </h4>
-                <ul class="list-group mb-3">
-                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                <ul class="list-group mb-3 ">
+                    <li class="list-group-item d-flex justify-content-between rounded">
                         <div>
-                            <h6 class="my-0">Lunes</h6>
+                            <h6 class="font-weight-bold">Lunes</h6>
                             <small class="text-muted">Todo el dia</small>
                         </div>
-                        <strong><span class="text-muted">1,2 y 3</span></strong>
+                        <strong><span>1,2 y 3</span></strong>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <li class="list-group-item d-flex justify-content-between lh-condensed rounded">
                         <div>
-                            <h6 class="my-0">Martes</h6>
+                            <h6 class="font-weight-bold">Martes</h6>
                             <small class="text-muted">Todo el dia</small>
                         </div>
-                        <strong><span class="text-muted">4,5 y 6</span></strong>
+                        <strong><span>4,5 y 6</span></strong>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <li class="list-group-item d-flex justify-content-between lh-condensed rounded">
                         <div>
-                            <h6 class="my-0">Miercoles</h6>
+                            <h6 class="font-weight-bold">Miercoles</h6>
                             <small class="text-muted">Todo el dia</small>
                         </div>
-                        <strong><span class="text-muted">7,8,9 y 0</span></strong>
+                        <strong><span>7,8,9 y 0</span></strong>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <li class="list-group-item d-flex justify-content-between lh-condensed rounded">
                         <div>
-                            <h6 class="my-0">Jueves</h6>
+                            <h6 class="font-weight-bold">Jueves</h6>
                             <small class="text-muted">Todo el dia</small>
                         </div>
-                        <strong><span class="text-muted">1,2 y 3</span></strong>
+                        <strong><span>1,2 y 3</span></strong>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <li class="list-group-item d-flex justify-content-between lh-condensed rounded">
                         <div>
-                            <h6 class="my-0">Viernres</h6>
+                            <h6 class="font-weight-bold">Viernes</h6>
                             <small class="text-muted">Todo el dia</small>
                         </div>
-                        <strong><span class="text-muted">4,5 y 6</span></strong>
+                        <strong><span>4,5 y 6</span></strong>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <li class="list-group-item d-flex justify-content-between lh-condensed rounded">
                         <div>
-                            <h6 class="my-0">Sabado</h6>
+                            <h6 class="font-weight-bold">Sabado</h6>
                             <small class="text-muted">Todo el dia</small>
                         </div>
-                        <strong><span class="text-muted">7,8,9 y 0</span></strong>
+                        <strong><span >7,8,9 y 0</span></strong>
                     </li>
                    
                 </ul>
 
             </div>
             <div class="col-md-8 order-md-1">
-                <h4 class="mb-3">Formulario de ingreso</h4>
+                <h4 class="mb-3 text-white"><strong>Formulario de ingreso</strong></h4>
                 <form class="needs-validation"  action="../visitas/nuevaVisita" method="POST">
                     <div class="row">
-                        <div class="form-group col-md-6 mb-3">
+                        <div class="form-group col-md-6 mb-3 text-white">
                             <label for="firstName">Nombre y Apellido</label>
-                            <input type="text" class="form-control" value="{{nombres}}" name="nombres" placeholder="Nombre y apellido">
+                            <input type="text" class="form-control rounded" value="{{nombres}}" name="nombres" placeholder="Nombre y apellido">
                         </div>
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-6 mb-3 text-white">
                             <label for="lastName">Cedula</label>
-                            <input type="text" class="form-control" value="{{cedula}}" name="cedula" placeholder="Cedula"/>
-                            <div class="invalid-feedback">
-                                Valid last name is required.
-                            </div>
+                            <input type="text" class="form-control rounded" value="{{cedula}}" name="cedula" placeholder="Cedula"/>
+                            
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-6 mb-3 text-white">
                             <label for="email">E-mail <span class="text-muted">(Opcional)</span></label>
-                            <input type="email" class="form-control" value="{{email}}" name="email" placeholder="you@example.com">
-                            <div class="invalid-feedback">
-                                Please enter a valid email address for shipping updates.
-                            </div>
+                            <input type="email" class="form-control rounded" value="{{email}}" name="email" placeholder="you@example.com">
+                            
                         </div>
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-6 mb-3 text-white">
                             <label for="username">Telefono</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                                    <span class="input-group-text rounded"><i class="fa fa-phone" aria-hidden="true"></i></span>
                                 </div>
                                 <input type="text" class="form-control" value="{{telefono}}" name="telefono" placeholder="Telefono" >
-                                <div class="invalid-feedback" style="width: 100%;">
-                                    is required.
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-6 mb-3 text-white">
                             <label for="username">Temperatura</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-thermometer-three-quarters"
+                                    <span class="input-group-text rounded"><i class="fa fa-thermometer-three-quarters"
                                             aria-hidden="true"></i></span>
                                 </div>
-                                <input type="text" class="form-control" value="{{temperatura}}" name="temperatura" placeholder="Temperatura"
-                                    >
-                                <div class="invalid-feedback" style="width: 100%;">
-                                    is required.
-                                </div>
+                                <input type="text" class="form-control rounded" value="{{temperatura}}" name="temperatura" placeholder="Temperatura">
                             </div>
                         </div>
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-6 mb-3 text-white">
                             <label >Genero</label>
-                            <select class="custom-select d-block w-100" value="{{genero}}" name="genero">
+                            <select class="custom-select d-block w-100 rounded" value="{{genero}}" name="genero">
                                 <option value="">Selecionar</option>
                                 <option>Hombre</option>
                                 <option>Mujer</option>
@@ -125,23 +114,21 @@ FORMULARIO AQUI
 
                     <div class="row">
 
-                        <div class="col-md-5 mb-3">
+                        <div class="col-md-5 mb-3 text-white ">
                             <label>Direccion de Residencia</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-home" aria-hidden="true"></i></span>
+                            <div class="input-group rounded">
+                                <div class="input-group-prepend ">
+                                    <span class="input-group-text rounded"><i class="fa fa-home" aria-hidden="true"></i></span>
                                 </div>
-                                <input type="text" class="form-control" value="{{direccion}}" name="direccion" placeholder="Direccion"
+                                <input type="text" class="form-control rounded" value="{{direccion}}" name="direccion" placeholder="Direccion"
                                    >
-                                <div class="invalid-feedback" style="width: 100%;">
-                                    is required.
-                                </div>
+                                
                             </div>
                         </div>
 
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-4 mb-3 text-white">
                             <label>Lugar de visita</label>
-                            <select class="custom-select d-block w-100" value="{{lugarVisita}}" name="lugarVisita">
+                            <select class="custom-select d-block w-100 rounded" value="{{lugarVisita}}" name="lugarVisita">
                                 <option value="">Selecionar</option>
                                 <option>Laboratorios</option>
                                 <option>Oficinas Falcultad</option>
@@ -149,26 +136,14 @@ FORMULARIO AQUI
                                 <option>Biblioteca</option>
                                 <option>Bienestar</option>
                             </select>
-                            <div class="invalid-feedback">
-                                ------.
-                            </div>
                         </div>
-                        <div class="col-md-3 mb-3">
+                        <div class="col-md-3 mb-3 text-white">
                             <label>Nota de Visita</label>
-                            <textarea type="text" class="form-control" value="{{nota}}" name="nota" placeholder=""></textarea>
+                            <textarea type="text" class="form-control rounded" value="{{nota}}" name="nota" placeholder=""></textarea>
                         </div>
                     </div>
-
-                    <hr class="mb-4">
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="same-address">
-                        <label class="custom-control-label" for="same-address">Shipping address is the same as my
-                            billing address</label>
-                    </div>
-
-                    <hr class="mb-4">
                     <div class="row"> 
-                        <div class="col-md-3 mb-3">  <button class="btn btn-primary btn-lg btn-block " type="submit">Registar ingreso</button></div>
+                        <div class="col-md-3 mb-3">  <button class="btn btn-primary btn-lg btn-block rounded " type="submit">Registar ingreso</button></div>
                     </div>
                    
                 </form>
