@@ -14,7 +14,9 @@ passport.use(new LocalStrategy({
     // Match Password's User
     const match = await user.matchPassword(password);
     if(match) {
+      console.log(user);
       return done(null, user);
+      
     } else {
       return done(null, false, { message: 'Contraseña incorrecta. Inténtelo de nuevo' });
     }
