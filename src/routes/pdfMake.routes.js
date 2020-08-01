@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const moment = require('moment');
 
 const pdfMake = require("../helpers/pdfmake");
 const vfsFonts = require("../helpers/vfs_fonts");
@@ -27,14 +28,7 @@ router.post('/reportes/crearReporte', async (req, res, next) => {
          //console.log('Reportes : ', reportes);
          return reportes; 
      });
-     console.log('Reportes ',Visitas); 
-         {text:'Cedula'},
-         {text:'Telefono'},
-         {text:'Email'},
-         {text:'Genero'},
-         {text:'Lugar de Visita'},
-         {text:'Hora entrada'},
-         {text:'Hora salida'},*/
+    */
 
     const Visitas = VisitaSaliente.find();
     const reportes = [];
@@ -68,7 +62,7 @@ router.post('/reportes/crearReporte', async (req, res, next) => {
             { text: reportes[i].dateSalida },
         ]);
         console.log('fila: ' + i, pdfdata);
-        
+
     }
     console.log(pdfdata.length);
     console.log(reportes[0].dateSalida)
@@ -79,29 +73,13 @@ router.post('/reportes/crearReporte', async (req, res, next) => {
     //pdfdata.push([{text: reportes[0].nota}],[{text:reportes[4].nota}]); 
     // console.log(pdfdata[2]);
 
-
-    /*
-    const pdfdata =[]; 
-    
-          pdfdata.push([
-            {text:'Nombres'},
-            {text:'Cedula'},
-            {text:'Telefono'},
-            {text:'Email'},
-            {text:'Genero'},
-            {text:'Temperatura'},
-            {text:'Lugar de Visita'},
-            {text:'Hora entrada'},
-            {text:'Hora salida'}
-          ]);
-           */
     var documentDefinition = {
         content: [
-            {text:'REPORTE UNIVERSIDAD SURCOLOMBIANA' ,style: 'header ' },
-            
-            
-            { text:'La siguiente tabla contiene el ingreso y salida de las personas a la universidad Surcolombiana.', style: 'subheader' },
-    
+            { text: 'REPORTE UNIVERSIDAD SURCOLOMBIANA', style: 'header ' },
+
+
+            { text: 'La siguiente tabla contiene el ingreso y salida de las personas a la universidad Surcolombiana.', style: 'subheader' },
+
             {
                 style: 'tableExample',
                 table: {
