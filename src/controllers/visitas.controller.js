@@ -50,36 +50,31 @@ visitasCtrl.salidaVisitas = async (req, res) => {
 
 visitasCtrl.buscador = async (req, res) => {
 
-	/*const visita = VisitaSaliente.findOne({cedula : req.body.cedula}, function (err, data) {
-		console.log('Errors: '+ err, 'Data length: ' + data.length);
-		console.log('data: ', data)
-		const reportes = data;
-		res.render("visitas/Visitas_visita", { data });
-		return visita; 
-	
-	});*/
-
 	const visita = Visita.findOne({ cedula: req.body.cedula });
-	
+
 	if (visita) {
-		var reporte;
+
 		for await (const doc of visita) {
-			// reporte.push(doc)
-			console.log('query', )
-			reporte=doc; 
-			res.render("visitas/busqueda_visita",{reporte});
+			const nombres = doc.nombres;
+			const cedula = doc.cedula;
+			const email = doc.email;
+			const id = doc._id;
+			const telefono = doc.telefono
+			const temperatura = doc.temperatura
+			const genero = doc.genero;
+			const direccion = doc.direccion;
+			const lugarVisita = doc.lugarVisita
+			const nota = doc.nota;
+			const date = doc.date;
+			const Rol_visitante = doc.Rol_visitante;
+			res.render("visitas/busqueda_visita", { nombres, id ,cedula,telefono,Rol_visitante, temperatura,direccion,nota,genero,date,lugarVisita,email});
 		}
-		console.log('reportesArray: ', reporte);
-		
+
+
 	} else {
 		req.flash("error_msg", "registro no encontrado");
 		res.render("visitas/busqueda_visita");
 	}
-
-
-	//res.redirect("/visitas/Visitas", {reporte});
-
-
 
 };
 module.exports = visitasCtrl;
