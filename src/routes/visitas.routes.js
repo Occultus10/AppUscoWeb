@@ -41,7 +41,7 @@ router.post('/visitas/nuevaVisita', isAuthenticated, [
         await newVisita.save();
         console.log("registro Creado en Visitas");
         req.flash("success_msg", "Entrada Autorizada");
-        res.redirect("/visitas/Visita");
+        res.redirect("/visitas/Visitas");
         //res.render("visitas/nueva_visita");
     }
 });
