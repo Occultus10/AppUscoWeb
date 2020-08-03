@@ -1,11 +1,12 @@
 
 <div class="container">
-<form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2 rounded" type="search" placeholder="Buscar por cédula">
+<form class="form-inline my-2 my-lg-0" action="/visitas/buscador" method="POST">
+      <input class="form-control mr-sm-2 rounded" name="cedula" placeholder="Buscar por cédula">
       <button class="btn btn-primary my-2 my-sm-0 rounded" type="submit">Buscar</button>
     </form>
-</div>
+
 <br>
+
 <br>
 <table class="table table-striped rounded" aria-haspopup="true" >
   <thead  class="thead-white text-black">
@@ -48,6 +49,7 @@
      {{/each}}
   </tbody>
 </table>
+</div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script>
   

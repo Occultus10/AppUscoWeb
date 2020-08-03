@@ -43,7 +43,7 @@ router.post('/reportes/crearReporte', async (req, res, next) => {
         { text: 'Nombres' },
         { text: 'Cedula' },
         { text: 'Telefono' },
-        { text: 'Genero' },
+        { text: 'Direccion' },
         { text: 'Lugar de Visita' },
         { text: 'Hora entrada' },
         { text: 'Hora salida' }
@@ -51,21 +51,21 @@ router.post('/reportes/crearReporte', async (req, res, next) => {
     ]);
 
     for (i = 0; i < reportes.length; i++) {
-        console.log('registro ', i);
+    
         pdfdata.push([
             { text: reportes[i].nombres },
             { text: reportes[i].cedula },
             { text: reportes[i].telefono },
-            { text: reportes[i].lugarVisita },
             { text: reportes[i].direccion },
-            { text: reportes[i].dateEntrada },
-            { text: reportes[i].dateSalida },
+            { text: reportes[i].lugarVisita },
+            { text: String(reportes[i].dateEntrada) },
+            { text: String(reportes[i].dateSalida) },
         ]);
         console.log('fila: ' + i, pdfdata);
 
     }
     console.log(pdfdata.length);
-    console.log(reportes[0].dateSalida)
+
 
 
 

@@ -3,6 +3,7 @@ const visitasCtrl = {};
 const Visita = require("../models/Visita");
 const VisitaSaliente = require("../models/VisitaSaliente");
 const app = require('../server');
+const { body } = require("express-validator");
 
 
 visitasCtrl.renderVisitasForm = (req, res) => {
@@ -15,6 +16,7 @@ visitasCtrl.renderVisitasTable = async (req, res) => {
 		.sort({ date: "desc" })
 		.lean();
 	res.render("visitas/Visitas_visita", { Visitas });
+
 };
 
 visitasCtrl.renderActualizarVisitasForm = async (req, res) => {
@@ -43,6 +45,41 @@ visitasCtrl.salidaVisitas = async (req, res) => {
 	await visitaSaliente.save();
 	await Visita.findByIdAndDelete(visita._id);
 	res.redirect("/visitas/Visitas");
+
+};
+
+visitasCtrl.buscador = async (req, res) => {
+
+	/*const visita = VisitaSaliente.findOne({cedula : req.body.cedula}, function (err, data) {
+		console.log('Errors: '+ err, 'Data length: ' + data.length);
+		console.log('data: ', data)
+		const reportes = data;
+		res.render("visitas/Visitas_visita", { data });
+		return visita; 
 	
+	});*/
+
+	const visita = Visita.findOne({ cedula: req.body.cedula });
+	
+	if (visita) {
+		var reporte;
+		for await (const doc of visita) {
+			// reporte.push(doc)
+			console.log('query', )
+			reporte=doc; 
+			res.render("visitas/busqueda_visita",{reporte});
+		}
+		console.log('reportesArray: ', reporte);
+		
+	} else {
+		req.flash("error_msg", "registro no encontrado");
+		res.render("visitas/busqueda_visita");
+	}
+
+
+	//res.redirect("/visitas/Visitas", {reporte});
+
+
+
 };
 module.exports = visitasCtrl;

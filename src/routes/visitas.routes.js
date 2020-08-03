@@ -4,8 +4,9 @@ const router = express.Router();
 const { check, validationResult } = require('express-validator');
 //____
 const { isAuthenticated } = require("../helpers/auth");
-const { renderVisitasForm, agregarVisita, renderVisitasTable, renderActualizarVisitasForm, salidaVisitas } = require("../controllers/visitas.controller");
+const { renderVisitasForm, agregarVisita, renderVisitasTable, renderActualizarVisitasForm, salidaVisitas, buscador } = require("../controllers/visitas.controller");
 const Visita = require("../models/Visita");
+const VisitaSaliente = require("../models/VisitaSaliente"); 
 const visitasCtrl = require("../controllers/visitas.controller");
 //____
 router.get("/visitas/nuevaVisita", isAuthenticated, renderVisitasForm);
@@ -30,15 +31,16 @@ router.post('/visitas/nuevaVisita', isAuthenticated, [
         req.session.errors = errors;
         req.session.success = false;
         console.log('mensaje de error', errors[0].msg);
-        res.render('visitas/nueva_visita', { errors, nombres, cedula, email, telefono, temperatura, genero, direccion, lugarVisita, nota }); req.session.success = true;
+        res.render('visitas/nueva_visita', { errors, nombres, cedula, email, telefono, temperatura, genero, direccion, lugarVisita, nota }); 
+        req.session.success = true;
     } else {
         const { nombres, cedula, email, telefono, temperatura, genero, direccion, lugarVisita, nota } = req.body;
         //console.log(nombres, "mensaje");
         const newVisita = new Visita({ nombres, cedula, email, telefono, temperatura, genero, direccion, lugarVisita, nota }); //console.log(nombres," guardar en db")
         await newVisita.save();
         console.log("registro Creado en Visitas");
-        req.flash("success_msg", "Entrada Autorisada");
-        res.redirect("/visitas/nuevaVisita");
+        req.flash("success_msg", "Entrada Autorizada");
+        res.redirect("/visitas/Visita");
         //res.render("visitas/nueva_visita");
     }
 });
@@ -78,5 +80,6 @@ router.put("/visitas/actualizar_Visita/:id", isAuthenticated, [
 
 });
 
+router.post("/visitas/buscador" ,buscador); 
 
 module.exports = router;
