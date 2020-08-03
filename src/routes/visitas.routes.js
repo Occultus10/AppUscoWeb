@@ -23,20 +23,21 @@ router.post('/visitas/nuevaVisita', isAuthenticated, [
     check('genero').not().isEmpty().withMessage('Debe escoger un Genero de los dispponibles'),
     check('direccion').not().isEmpty().withMessage('Una Direccion es requerida'),
     check('lugarVisita').not().isEmpty().withMessage('Es necesario escojer un lugar de visita'),
+    check('Rol_visitante').not().isEmpty().withMessage('Es necesario escojer un rol de usuario'),
 ], async (req, res) => {
-    const { nombres, cedula, email, telefono, temperatura, genero, direccion, lugarVisita, nota } = req.body;
+    const { nombres, cedula, email, telefono, temperatura, genero, direccion, lugarVisita, nota, Rol_visitante } = req.body;
     const errors = validationResult(req).array();
 
     if (errors.length > 0) {
         req.session.errors = errors;
         req.session.success = false;
         console.log('mensaje de error', errors[0].msg);
-        res.render('visitas/nueva_visita', { errors, nombres, cedula, email, telefono, temperatura, genero, direccion, lugarVisita, nota }); 
+        res.render('visitas/nueva_visita', { errors, nombres, cedula, email, telefono, temperatura, genero, direccion, lugarVisita, nota, Rol_visitante }); 
         req.session.success = true;
     } else {
-        const { nombres, cedula, email, telefono, temperatura, genero, direccion, lugarVisita, nota } = req.body;
+        const { nombres, cedula, email, telefono, temperatura, genero, direccion, lugarVisita, nota, Rol_visitante } = req.body;
         //console.log(nombres, "mensaje");
-        const newVisita = new Visita({ nombres, cedula, email, telefono, temperatura, genero, direccion, lugarVisita, nota }); //console.log(nombres," guardar en db")
+        const newVisita = new Visita({ nombres, cedula, email, telefono, temperatura, genero, direccion, lugarVisita, nota, Rol_visitante }); //console.log(nombres," guardar en db")
         await newVisita.save();
         console.log("registro Creado en Visitas");
         req.flash("success_msg", "Entrada Autorizada");
@@ -55,9 +56,10 @@ router.put("/visitas/actualizar_Visita/:id", isAuthenticated, [
     check('genero').not().isEmpty().withMessage('Debe escoger un Genero de los dispponibles'),
     check('direccion').not().isEmpty().withMessage('Una Direccion es requerida'),
     check('lugarVisita').not().isEmpty().withMessage('Es necesario escojer un lugar de visita'),
+    check('Rol_visitante').not().isEmpty().withMessage('Es necesario escojer un rol de usuario'),
 
 ], async (req, res) => {
-    const { nombres, cedula, email, telefono, temperatura, genero, direccion, lugarVisita, nota } = req.body;
+    const { nombres, cedula, email, telefono, temperatura, genero, direccion, lugarVisita, nota, Rol_visitante } = req.body;
     const errors = validationResult(req).array();
 
 
@@ -66,13 +68,13 @@ router.put("/visitas/actualizar_Visita/:id", isAuthenticated, [
         req.session.success = false;
 
         console.log('mensaje de error', errors[0].msg);
-        res.render('visitas/actualizar_visita', { errors, nombres, cedula, email, telefono, temperatura, genero, direccion, lugarVisita, nota });
+        res.render('visitas/actualizar_visita', { errors, nombres, cedula, email, telefono, temperatura, genero, direccion, lugarVisita, nota, Rol_visitante });
         req.session.success = true;
     } else {
 
-        const { nombres, cedula, email, telefono, temperatura, genero, direccion, lugarVisita, nota } = req.body;
+        const { nombres, cedula, email, telefono, temperatura, genero, direccion, lugarVisita, nota, Rol_visitante } = req.body;
 
-        await Visita.findByIdAndUpdate(req.params.id, { nombres, cedula, email, telefono, temperatura, genero, direccion, lugarVisita, nota });
+        await Visita.findByIdAndUpdate(req.params.id, { nombres, cedula, email, telefono, temperatura, genero, direccion, lugarVisita, nota, Rol_visitante });
         req.flash("success_msg", "Cambios hechos exitósamente.");
         res.redirect("/visitas/Visitas");
 
