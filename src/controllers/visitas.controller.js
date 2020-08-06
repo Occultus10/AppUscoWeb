@@ -53,27 +53,65 @@ visitasCtrl.buscador = async (req, res) => {
 	const visita = Visita.findOne({ cedula: req.body.cedula });
 
 	if (visita) {
+		const reportes = [];
+		for await (doc of visita) {
+			reportes.push(doc);
 
-		for await (const doc of visita) {
-			const nombres = doc.nombres;
-			const cedula = doc.cedula;
-			const email = doc.email;
-			const id = doc._id;
-			const telefono = doc.telefono
-			const temperatura = doc.temperatura
-			const genero = doc.genero;
-			const direccion = doc.direccion;
-			const lugarVisita = doc.lugarVisita
-			const nota = doc.nota;
-			const date = doc.date;
-			const Rol_visitante = doc.Rol_visitante;
-			res.render("visitas/busqueda_visita", { nombres, id ,cedula,telefono,Rol_visitante, temperatura,direccion,nota,genero,date,lugarVisita,email});
+			for (i = 0; i < 1; i++) {
+				const nombres = reportes[i].nombres;
+				const cedula = reportes[i].cedula;
+				const email = reportes[i].email;
+				const id = reportes[i]._id;
+				const telefono = reportes[i].telefono
+				const temperatura = reportes[i].temperatura
+				const genero = reportes[i].genero;
+				const direccion = reportes[i].direccion;
+				const lugarVisita = reportes[i].lugarVisita
+				const nota = reportes[i].nota;
+				const date = reportes[i].date;
+				const Rol_visitante = reportes[i].Rol_visitante;
+				res.render("visitas/busqueda_visita", { nombres, id, cedula, telefono, Rol_visitante, temperatura, direccion, nota, genero, date, lugarVisita, email });
+
+			}
 		}
-
-
 	} else {
 		req.flash("error_msg", "registro no encontrado");
 		res.render("visitas/busqueda_visita");
+	}
+
+};
+
+visitasCtrl.buscadorVisitasRecientes = async (req, res) => {
+
+	const visita = VisitaSaliente.findOne({ cedula: req.body.cedula });
+	if (visita) {
+		const reportes = [];
+		for await (doc of visita) {
+			reportes.push(doc)
+		}
+
+		for (i = 0; i < 1; i++) {
+			const visitNombres = reportes[i].nombres;
+			const visitCedula = reportes[i].cedula;
+			const visitEmail = reportes[i].email;
+			const visitTelefono = reportes[i].telefono;
+			const visitGenero = reportes[i].genero;
+			const visitDireccion = reportes[i].direccion;
+			const visitRol_visitante = reportes[i].Rol_visitante;
+
+			res.render("visitas/nueva_visita", {
+				visitNombres,
+				visitCedula,
+				visitTelefono,
+				visitRol_visitante,
+				visitDireccion,
+				visitGenero,
+				visitEmail
+			});
+		}
+	} else {
+		req.flash("error_msg", "registro no encontrado");
+		res.redirect("visitas/nuevaVisita");
 	}
 
 };
