@@ -7,55 +7,17 @@
 <div class="Container ">                
     <div style="background-color:#4D626C"class="jumbotron p-4 p-md-5  rounded ">
         <div class="row ">
-            <div class="col-md-4 order-md-2 mb-4 ">
-                <h4 class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="text-white"><strong>Pico y Cedula para la ciudad de Neiva </strong></span>
+            <div class="col-md-4 order-md-2 mb-4 text-white">
+                <h4 class="d-flex justify-content-between align-items-center mb-3 ">
+                    <span class="text-white"><strong>¡RECOMENDACIONES!</strong></span>
                 </h4>
-                <ul class="list-group mb-3 ">
-                    <li class="list-group-item d-flex justify-content-between rounded">
-                        <div>
-                            <h6 class="font-weight-bold">Lunes</h6>
-                            <small class="text-muted">Todo el dia</small>
-                        </div>
-                        <strong><span>1,2 y 3</span></strong>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between lh-condensed rounded">
-                        <div>
-                            <h6 class="font-weight-bold">Martes</h6>
-                            <small class="text-muted">Todo el dia</small>
-                        </div>
-                        <strong><span>4,5 y 6</span></strong>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between lh-condensed rounded">
-                        <div>
-                            <h6 class="font-weight-bold">Miercoles</h6>
-                            <small class="text-muted">Todo el dia</small>
-                        </div>
-                        <strong><span>7,8,9 y 0</span></strong>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between lh-condensed rounded">
-                        <div>
-                            <h6 class="font-weight-bold">Jueves</h6>
-                            <small class="text-muted">Todo el dia</small>
-                        </div>
-                        <strong><span>1,2 y 3</span></strong>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between lh-condensed rounded">
-                        <div>
-                            <h6 class="font-weight-bold">Viernes</h6>
-                            <small class="text-muted">Todo el dia</small>
-                        </div>
-                        <strong><span>4,5 y 6</span></strong>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between lh-condensed rounded">
-                        <div>
-                            <h6 class="font-weight-bold">Sabado</h6>
-                            <small class="text-muted">Todo el dia</small>
-                        </div>
-                        <strong><span >7,8,9 y 0</span></strong>
-                    </li>
-                   
-                </ul>
+                <br>
+                
+                <h5>*Se recomienda a la hora de buscar un usuario registrado previamente, solo modificar los siguientes campos:<br>
+                    -Temperatura<br>
+                    -Lugar de visita<br>
+                    -Notas de visitas<br>
+                </h5>
 
             </div>
             <div class="col-md-8 order-md-1">
@@ -81,11 +43,11 @@
                         </div>
                         <div class="col-md-6 mb-3 text-white">
                             <label for="username">Telefono</label>
-                            <div class="input-group">
+                            <div class="input-group ">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text rounded"><i class="fa fa-phone" aria-hidden="true"></i></span>
                                 </div>
-                                <input type="text" class="form-control" value="{{telefono}}" name="telefono" placeholder="Telefono" >
+                                <input type="text" class="form-control rounded" value="{{telefono}}" name="telefono" placeholder="Telefono" >
                                 
                             </div>
                         </div>
@@ -115,7 +77,7 @@
 
                     <div class="row">
 
-                        <div class="col-md-5 mb-3 text-white ">
+                        <div class="col-md-6 mb-3 text-white ">
                             <label>Direccion de Residencia</label>
                             <div class="input-group rounded">
                                 <div class="input-group-prepend ">
@@ -127,7 +89,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-4 mb-3 text-white">
+                        <div class="col-md-6 mb-3 text-white">
                             <label>Lugar de visita</label>
                             <select class="custom-select d-block w-100 rounded" value="{{lugarVisita}}" name="lugarVisita">
                                 <option value="">Selecionar</option>
@@ -138,7 +100,7 @@
                                 <option>Bienestar</option>
                             </select>
                         </div>
-                        <div class="col-md-4 mb-3 text-white">
+                        <div class="col-md-6 mb-3 text-white">
                             <label>Rol de visitante</label>
                             <select class="custom-select d-block w-100 rounded" value="{{Rol_visitante}}" name="Rol_visitante">
                                 <option value="">Selecionar</option>
@@ -148,7 +110,7 @@
                                 <option>Otro</option>
                             </select>
                         </div>
-                        <div class="col-md-3 mb-3 text-white">
+                        <div class="col-md-6 mb-3 text-white">
                             <label>Nota de Visita</label>
                             <textarea type="text" class="form-control rounded" value="{{nota}}" name="nota" placeholder=""></textarea>
                         </div>
