@@ -9,7 +9,7 @@
         <div class="row ">
         
             <div class="col-md-12 order-md-1">
-                <h4 class="mb-3">Formulario de Edicion de datos de ingreso</h4>
+                <h4 class="mb-3">FORMULARIO PARA EDITAR DATOS DE USUARIOS</h4>
                  <form action="/visitas/actualizar_Visita/{{Visitas._id}}?_method=PUT" method="POST">
                     <input type="hidden" name="_method" value="PUT">
                     <div class="row">
@@ -19,11 +19,9 @@
                                 >
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="lastName">Cedula</label>
-                            <input type="text" class="form-control rounded" value="{{Visitas.cedula}}" name="cedula" placeholder="Cedula" >
-                            <div class="invalid-feedback">
-                                Valid last name is required.
-                            </div>
+                            <label for="lastName">Cédula</label>
+                            <input type="text" class="form-control rounded" value="{{Visitas.cedula}}" name="cedula" placeholder="Cédula" >
+                            
                         </div>
                     </div>
 
@@ -31,20 +29,16 @@
                         <div class="col-md-6 mb-3">
                             <label for="email">E-mail <span class="text-muted">(Opcional)</span></label>
                             <input type="email" class="form-control rounded" value="{{Visitas.email}}" name="email" placeholder="you@example.com">
-                            <div class="invalid-feedback">
-                                Please enter a valid email address for shipping updates.
-                            </div>
+                            
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="username">Telefono</label>
+                            <label for="username">Teléfono</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text rounded"><i class="fa fa-phone" aria-hidden="true"></i></span>
                                 </div>
-                                <input type="text" class="form-control rounded" value="{{Visitas.telefono}}" name="telefono" placeholder="Telefono" >
-                                <div class="invalid-feedback" style="width: 100%;">
-                                    is required.
-                                </div>
+                                <input type="text" class="form-control rounded" value="{{Visitas.telefono}}" name="telefono" placeholder="Teléfono" >
+                                
                             </div>
                         </div>
                     </div>
@@ -59,38 +53,35 @@
                                 </div>
                                 <input type="text" class="form-control rounded " value="{{Visitas.temperatura}}" name="temperatura" placeholder="Temperatura"
                                     >
-                                <div class="invalid-feedback" style="width: 100%;">
-                                    is required.
-                                </div>
+                                
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label >Genero</label>
+                            <label >Género</label>
                             <select class="custom-select d-block w-100 rounded" value="" name="genero">
                                 <option>{{Visitas.genero}}</option>
                                 <option>Hombre</option>
                                 <option>Mujer</option>
+                                <option>Otro</option>
                             </select>
                         </div>
                     </div>
 
                     <div class="row">
 
-                        <div class="col-md-5 mb-3">
-                            <label>Direccion de Residencia</label>
+                        <div class="col-md-6 mb-3">
+                            <label>Dirección de Residencia</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text rounded"><i class="fa fa-home" aria-hidden="true"></i></span>
                                 </div>
-                                <input type="text" class="form-control rounded" value="{{Visitas.direccion}}" name="direccion" placeholder="Direccion"
+                                <input type="text" class="form-control rounded" value="{{Visitas.direccion}}" name="direccion" placeholder="Dirección"
                                    >
-                                <div class="invalid-feedback" style="width: 100%;">
-                                    is required.
-                                </div>
+                                
                             </div>
                         </div>
 
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-6 mb-3">
                             <label>Lugar de visita</label>
                             <select class="custom-select d-block w-100 rounded"  name="lugarVisita">
                                 <option>{{Visitas.lugarVisita}}</option>
@@ -100,17 +91,24 @@
                                 <option>Biblioteca</option>
                                 <option>Bienestar</option>
                             </select>
-                            <div class="invalid-feedback">
-                                ------.
-                            </div>
                         </div>
-                        <div class="col-md-3 mb-3">
+                        <div class="col-md-6 mb-3 text-white">
+                            <label>Rol de visitante</label>
+                            <select class="custom-select d-block w-100 rounded" value="{{Rol_visitante}}" name="Rol_visitante">
+                                <option value="">Selecionar</option>
+                                <option>Estudiante</option>
+                                <option>Docente</option>
+                                <option>Administrativo</option>
+                                <option>Otro</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
                             <label>Nota de Visita</label>
                             <textarea type="text" class="form-control rounded" name="nota" placeholder="">{{Visitas.nota}}</textarea>
                         </div>
                     </div>
 
-                    <hr class="mb-4">
+                    
                     <div class="row"> 
                         <div class="col-md-3 mb-3">  <button class="btn btn-primary btn-lg btn-block rounded" type="submit">Actualizar Datos</button></div>
                     </div>
