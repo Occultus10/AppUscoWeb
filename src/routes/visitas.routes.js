@@ -4,7 +4,7 @@ const router = express.Router();
 const { check, validationResult } = require('express-validator');
 //____
 const { isAuthenticated } = require("../helpers/auth");
-const { renderVisitasForm, agregarVisita, renderVisitasTable, renderActualizarVisitasForm, salidaVisitas, buscador } = require("../controllers/visitas.controller");
+const { renderVisitasForm, agregarVisita, renderVisitasTable, renderActualizarVisitasForm, salidaVisitas, buscador,buscadorVisitasRecientes } = require("../controllers/visitas.controller");
 const Visita = require("../models/Visita");
 const VisitaSaliente = require("../models/VisitaSaliente"); 
 const visitasCtrl = require("../controllers/visitas.controller");
@@ -25,6 +25,8 @@ router.post('/visitas/nuevaVisita', isAuthenticated, [
     check('lugarVisita').not().isEmpty().withMessage('Es necesario escojer un lugar de visita'),
     check('Rol_visitante').not().isEmpty().withMessage('Es necesario escojer un rol de usuario'),
 ], async (req, res) => {
+
+
     const { nombres, cedula, email, telefono, temperatura, genero, direccion, lugarVisita, nota, Rol_visitante } = req.body;
     const errors = validationResult(req).array();
 
@@ -52,8 +54,8 @@ router.put("/visitas/actualizar_Visita/:id", isAuthenticated, [
     check('cedula').not().isEmpty().withMessage('Un numero de cedula es requerido').isLength({ min: 5 }).withMessage('Cedula no valida'),
     check('email').not().isEmpty().withMessage('Email es requerido').isEmail().withMessage('Email no es valido'),
     check('telefono').not().isEmpty().withMessage('Email es requerido').isLength({ min: 7 }).withMessage('Telefono muy corto').isNumeric().withMessage('No se admiten letras'),
-    check('temperatura').not().notEmpty().isNumeric().withMessage('Valor de Temperarura no valido.'),
-    check('genero').not().isEmpty().withMessage('Debe escoger un Genero de los dispponibles'),
+    check('temperatura').not().notEmpty().withMessage('Valor de Temperarura es requerido').isNumeric().withMessage('Valor de Temperarura no valido.'),
+    check('genero').not().isEmpty().withMessage('Debe escoger un Genero de los disponibles'),
     check('direccion').not().isEmpty().withMessage('Una Direccion es requerida'),
     check('lugarVisita').not().isEmpty().withMessage('Es necesario escojer un lugar de visita'),
     check('Rol_visitante').not().isEmpty().withMessage('Es necesario escojer un rol de usuario'),
@@ -82,6 +84,8 @@ router.put("/visitas/actualizar_Visita/:id", isAuthenticated, [
 
 });
 
-router.post("/visitas/buscador" ,buscador); 
+router.post("/visitas/buscador",buscador); 
+
+router.post("/visitas/buscadorVisitasRecientes",buscadorVisitasRecientes); 
 
 module.exports = router;

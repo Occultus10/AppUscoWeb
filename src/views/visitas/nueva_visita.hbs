@@ -1,92 +1,53 @@
+{{#if errors }}
+{{#each errors }}
+<p class="alert alert-danger">{{ this.msg }}</p>
+{{/each}}
+{{/if}}
+<div class="Container ">
 
- {{#if errors }}
-              {{#each errors }}
-                <p class="alert alert-danger">{{ this.msg }}</p>
-              {{/each}}
-            {{/if}}
-<div class="Container ">                
-    <div style="background-color:#4D626C"class="jumbotron p-4 p-md-5  rounded ">
+    <form class="form-inline my-2 my-lg-0" action="/visitas/buscadorVisitasRecientes" method="POST">
+      <input class="form-control mr-sm-2 rounded" name="cedula" placeholder="Buscar por cédula">
+      <button class="btn btn-primary my-2 my-sm-0 rounded" type="submit">Buscar</button>
+    </form>
+
+    <div style="background-color:#4D626C" class="jumbotron p-4 p-md-5  rounded ">
         <div class="row ">
-            <div class="col-md-4 order-md-2 mb-4 ">
-                <h4 class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="text-white"><strong>Pico y Cedula para la ciudad de Neiva </strong></span>
-                </h4>
-                <ul class="list-group mb-3 ">
-                    <li class="list-group-item d-flex justify-content-between rounded">
-                        <div>
-                            <h6 class="font-weight-bold">Lunes</h6>
-                            <small class="text-muted">Todo el dia</small>
-                        </div>
-                        <strong><span>1,2 y 3</span></strong>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between lh-condensed rounded">
-                        <div>
-                            <h6 class="font-weight-bold">Martes</h6>
-                            <small class="text-muted">Todo el dia</small>
-                        </div>
-                        <strong><span>4,5 y 6</span></strong>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between lh-condensed rounded">
-                        <div>
-                            <h6 class="font-weight-bold">Miercoles</h6>
-                            <small class="text-muted">Todo el dia</small>
-                        </div>
-                        <strong><span>7,8,9 y 0</span></strong>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between lh-condensed rounded">
-                        <div>
-                            <h6 class="font-weight-bold">Jueves</h6>
-                            <small class="text-muted">Todo el dia</small>
-                        </div>
-                        <strong><span>1,2 y 3</span></strong>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between lh-condensed rounded">
-                        <div>
-                            <h6 class="font-weight-bold">Viernes</h6>
-                            <small class="text-muted">Todo el dia</small>
-                        </div>
-                        <strong><span>4,5 y 6</span></strong>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between lh-condensed rounded">
-                        <div>
-                            <h6 class="font-weight-bold">Sabado</h6>
-                            <small class="text-muted">Todo el dia</small>
-                        </div>
-                        <strong><span >7,8,9 y 0</span></strong>
-                    </li>
-                   
-                </ul>
-
-            </div>
-            <div class="col-md-8 order-md-1">
+           
+            <div class="col-md-12 order-md-1">
                 <h4 class="mb-3 text-white"><strong>Formulario de ingreso</strong></h4>
-                <form class="needs-validation"  action="../visitas/nuevaVisita" method="POST">
+                <form class="needs-validation" action="../visitas/nuevaVisita" method="POST">
                     <div class="row">
+                          <div class="col-md-6 mb-3 text-white">
+                            <label for="lastName">Cedula</label>
+                            <input type="text" class="form-control rounded" value="{{visitCedula}}{{cedula}}" name="cedula"
+                                placeholder="Cedula" />
+
+                        </div>
                         <div class="form-group col-md-6 mb-3 text-white">
                             <label for="firstName">Nombre y Apellido</label>
-                            <input type="text" class="form-control rounded" value="{{nombres}}" name="nombres" placeholder="Nombre y apellido">
+                            <input type="text" class="form-control rounded" value="{{visitNombres}}{{nombres}}" name="nombres"
+                                placeholder="Nombre y apellido">
                         </div>
-                        <div class="col-md-6 mb-3 text-white">
-                            <label for="lastName">Cedula</label>
-                            <input type="text" class="form-control rounded" value="{{cedula}}" name="cedula" placeholder="Cedula"/>
-                            
-                        </div>
+                      
                     </div>
 
                     <div class="row">
                         <div class="col-md-6 mb-3 text-white">
                             <label for="email">E-mail <span class="text-muted">(Opcional)</span></label>
-                            <input type="email" class="form-control rounded" value="{{email}}" name="email" placeholder="you@example.com">
-                            
+                            <input type="email" class="form-control rounded" value="{{visitEmail}}{{email}}" name="email"
+                                placeholder="you@example.com">
+
                         </div>
                         <div class="col-md-6 mb-3 text-white">
                             <label for="username">Telefono</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text rounded"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                                    <span class="input-group-text rounded"><i class="fa fa-phone"
+                                            aria-hidden="true"></i></span>
                                 </div>
-                                <input type="text" class="form-control" value="{{telefono}}" name="telefono" placeholder="Telefono" >
-                                
+                                <input type="text" class="form-control" value="{{visitTelefono}}{{telefono}}" name="telefono"
+                                    placeholder="Telefono">
+
                             </div>
                         </div>
                     </div>
@@ -99,13 +60,14 @@
                                     <span class="input-group-text rounded"><i class="fa fa-thermometer-three-quarters"
                                             aria-hidden="true"></i></span>
                                 </div>
-                                <input type="text" class="form-control rounded" value="{{temperatura}}" name="temperatura" placeholder="Temperatura">
+                                <input type="text" class="form-control rounded" value="{{temperatura}}"
+                                    name="temperatura" placeholder="Temperatura">
                             </div>
                         </div>
                         <div class="col-md-6 mb-3 text-white">
-                            <label >Genero</label>
-                            <select class="custom-select d-block w-100 rounded" value="{{genero}}" name="genero">
-                                <option value="">Selecionar</option>
+                            <label>Genero</label>
+                            <select class="custom-select d-block w-100 rounded" value="" name="genero">
+                                <option>{{visitGenero}}{{genero}}</option>
                                 <option>Hombre</option>
                                 <option>Mujer</option>
                                 <option>Otro</option>
@@ -119,17 +81,19 @@
                             <label>Direccion de Residencia</label>
                             <div class="input-group rounded">
                                 <div class="input-group-prepend ">
-                                    <span class="input-group-text rounded"><i class="fa fa-home" aria-hidden="true"></i></span>
+                                    <span class="input-group-text rounded"><i class="fa fa-home"
+                                            aria-hidden="true"></i></span>
                                 </div>
-                                <input type="text" class="form-control rounded" value="{{direccion}}" name="direccion" placeholder="Direccion"
-                                   >
-                                
+                                <input type="text" class="form-control rounded" value="{{visitDireccion}}{{direccion}}" name="direccion"
+                                    placeholder="Direccion">
+
                             </div>
                         </div>
 
                         <div class="col-md-4 mb-3 text-white">
                             <label>Lugar de visita</label>
-                            <select class="custom-select d-block w-100 rounded" value="{{lugarVisita}}" name="lugarVisita">
+                            <select class="custom-select d-block w-100 rounded" value="{{lugarVisita}}"
+                                name="lugarVisita">
                                 <option value="">Selecionar</option>
                                 <option>Laboratorios</option>
                                 <option>Oficinas Falcultad</option>
@@ -140,8 +104,9 @@
                         </div>
                         <div class="col-md-4 mb-3 text-white">
                             <label>Rol de visitante</label>
-                            <select class="custom-select d-block w-100 rounded" value="{{Rol_visitante}}" name="Rol_visitante">
-                                <option value="">Selecionar</option>
+                            <select class="custom-select d-block w-100 rounded" value="{{Rol_visitante}}"
+                                name="Rol_visitante">
+                                <option value="">{{visitRol_visitante}}</option>
                                 <option>Estudiante</option>
                                 <option>Docente</option>
                                 <option>Administrativo</option>
@@ -150,13 +115,15 @@
                         </div>
                         <div class="col-md-3 mb-3 text-white">
                             <label>Nota de Visita</label>
-                            <textarea type="text" class="form-control rounded" value="{{nota}}" name="nota" placeholder=""></textarea>
+                            <textarea type="text" class="form-control rounded" value="{{nota}}" name="nota"
+                                placeholder=""></textarea>
                         </div>
                     </div>
-                    <div class="row"> 
-                        <div class="col-md-3 mb-3">  <button class="btn btn-primary btn-lg btn-block rounded " type="submit">Registar ingreso</button></div>
+                    <div class="row">
+                        <div class="col-md-3 mb-3"> <button class="btn btn-primary btn-lg btn-block rounded "
+                                type="submit">Registar ingreso</button></div>
                     </div>
-                   
+
                 </form>
             </div>
         </div>
