@@ -20,7 +20,7 @@ router.post('/visitas/nuevaVisita', isAuthenticated, [
     check('email').not().isEmpty().withMessage('Email es requerido').isEmail().withMessage('Email no es valido'),
     check('telefono').not().isEmpty().withMessage('Email es requerido').isLength({ min: 7 }).withMessage('Telefono muy corto').isNumeric().withMessage('No se admiten letras'),
     check('temperatura').not().notEmpty().isNumeric().withMessage('Valor de Temperarura no valido.'),
-    check('genero').not().isEmpty().withMessage('Debe escoger un Genero de los dispponibles'),
+    check('genero').not().isEmpty().withMessage('Debe escoger un Genero de los disponibles'),
     check('direccion').not().isEmpty().withMessage('Una Direccion es requerida'),
     check('lugarVisita').not().isEmpty().withMessage('Es necesario escojer un lugar de visita'),
     check('Rol_visitante').not().isEmpty().withMessage('Es necesario escojer un rol de usuario'),
@@ -29,6 +29,9 @@ router.post('/visitas/nuevaVisita', isAuthenticated, [
 
     const { nombres, cedula, email, telefono, temperatura, genero, direccion, lugarVisita, nota, Rol_visitante } = req.body;
     const errors = validationResult(req).array();
+    if(temperatura<34 || temperatura > 38){
+       errors.push({msg: "Valor de Temperarura no valido.", value:"",param:"temperatura", location:"body"});
+    }
 
     if (errors.length > 0) {
         req.session.errors = errors;
@@ -48,7 +51,7 @@ router.post('/visitas/nuevaVisita', isAuthenticated, [
     }
 });
 
-router.put("/visitas/actualizar_Visita/:id", isAuthenticated, [
+router.put("/visitas/actualizarVisita/:id", isAuthenticated, [
 
     check('nombres').not().isEmpty().withMessage('Nombre y Apellido son requeridos.').isLength({ min: 3 }).withMessage('Nombre y Apellido corto'),
     check('cedula').not().isEmpty().withMessage('Un numero de cedula es requerido').isLength({ min: 5 }).withMessage('Cedula no valida'),
@@ -61,8 +64,13 @@ router.put("/visitas/actualizar_Visita/:id", isAuthenticated, [
     check('Rol_visitante').not().isEmpty().withMessage('Es necesario escojer un rol de usuario'),
 
 ], async (req, res) => {
+    
     const { nombres, cedula, email, telefono, temperatura, genero, direccion, lugarVisita, nota, Rol_visitante } = req.body;
+    const _id = req.params.id
     const errors = validationResult(req).array();
+    if(temperatura<34 || temperatura > 38){
+        errors.push({msg: "Valor de Temperarura no valido.", value:"",param:"temperatura", location:"body"});
+     }
 
 
     if (errors.length > 0) {
@@ -70,7 +78,7 @@ router.put("/visitas/actualizar_Visita/:id", isAuthenticated, [
         req.session.success = false;
 
         console.log('mensaje de error', errors[0].msg);
-        res.render('visitas/actualizar_visita', { errors, nombres, cedula, email, telefono, temperatura, genero, direccion, lugarVisita, nota, Rol_visitante });
+        res.render('visitas/actualizar_visita', { errors, _id, nombres, cedula, email, telefono, temperatura, genero, direccion, lugarVisita, nota, Rol_visitante });
         req.session.success = true;
     } else {
 

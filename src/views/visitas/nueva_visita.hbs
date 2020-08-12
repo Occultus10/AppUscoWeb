@@ -1,25 +1,30 @@
-
- {{#if errors }}
-              {{#each errors }}
-                <p class="alert alert-danger">{{ this.msg }}</p>
-              {{/each}}
-            {{/if}}
-<div class="Container ">                
-    <div style="background-color:#4D626C"class="jumbotron p-4 p-md-12  rounded ">
-        <form class="form-inline my-2 my-lg-0 col-md-0 mb-3 "  action="/visitas/buscadorVisitasRecientes" method="POST">
-      <input class="form-control mr-sm-2 rounded" name="cedula" placeholder="Buscar por cédula">
-      <button class="btn btn-primary my-2 my-sm-0 rounded "  type="submit">Buscar</button>
-    </form>
-    <hr>
+{{#if errors }}
+{{#each errors }}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <span class="alert-inner--icon text-danger"><i class="fas fa-times"></i></span>
+    {{ this.msg }} <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{{/each}}
+{{/if}}
+<div class="Container ">
+    <div style="background-color:#4D626C" class="jumbotron p-4 p-md-12  rounded ">
+        <form class="form-inline my-2 my-lg-0 col-md-0 mb-3 " action="/visitas/buscadorVisitasRecientes" method="POST">
+            <input class="form-control mr-sm-2 rounded" name="cedula" placeholder="Buscar por cédula">
+            <button class="btn btn-primary my-2 my-sm-0 rounded " type="submit">Buscar</button>
+        </form>
+        <hr>
         <div class="row ">
-            
+
             <div class="col-md-4 order-md-2 mb-4 text-white">
                 <h4 class="d-flex justify-content-between align-items-center mb-6 ">
                     <span class="text-white"><strong>¡RECOMENDACIONES!</strong></span>
                 </h4>
                 <br>
-                
-                <h5>*Se recomienda a la hora de buscar un usuario registrado previamente, solo modificar los siguientes campos:<br>
+
+                <h5>*Se recomienda a la hora de buscar un usuario registrado previamente, solo modificar los siguientes
+                    campos:<br>
                     -Temperatura<br>
                     -Lugar de visita<br>
                     -Nota de visita<br>
@@ -28,33 +33,38 @@
             </div>
             <div class="col-md-8 order-md-1">
                 <h4 class="mb-3 text-white"><strong>FORMULARIO DE INGRESO</strong></h4>
-                <form class="needs-validation"  action="../visitas/nuevaVisita" method="POST">
+                <form class="needs-validation" action="../visitas/nuevaVisita" method="POST">
                     <div class="row">
                         <div class="form-group col-md-6 mb-3 text-white">
                             <label for="firstName">Nombre y Apellido</label>
-                            <input type="text" class="form-control rounded" value="{{visitNombres}}{{nombres}}" name="nombres" placeholder="Nombre y apellido">
+                            <input type="text" class="form-control rounded" value="{{visitNombres}}{{nombres}}"
+                                name="nombres" placeholder="Nombre y apellido">
                         </div>
                         <div class="col-md-6 mb-3 text-white">
                             <label for="lastName">Cédula</label>
-                            <input type="text" class="form-control rounded" value="{{visitCedula}}{{cedula}}" name="cedula" placeholder="Cédula"/>
-                            
+                            <input type="text" class="form-control rounded" value="{{visitCedula}}{{cedula}}"
+                                name="cedula" placeholder="Cédula" />
+
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6 mb-3 text-white">
                             <label for="email">E-mail <span class="text-muted">(Opcional)</span></label>
-                            <input type="email" class="form-control rounded" value="{{visitEmail}}{{email}}" name="email" placeholder="you@example.com">
-                            
+                            <input type="email" class="form-control rounded" value="{{visitEmail}}{{email}}"
+                                name="email" placeholder="you@example.com">
+
                         </div>
                         <div class="col-md-6 mb-3 text-white">
                             <label for="username">Teléfono</label>
                             <div class="input-group ">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text rounded"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                                    <span class="input-group-text rounded"><i class="fa fa-phone"
+                                            aria-hidden="true"></i></span>
                                 </div>
-                                <input type="text" class="form-control rounded" value="{{visitTelefono}}{{telefono}}" name="telefono" placeholder="Teléfono" >
-                                
+                                <input type="text" class="form-control rounded" value="{{visitTelefono}}{{telefono}}"
+                                    name="telefono" placeholder="Teléfono">
+
                             </div>
                         </div>
                     </div>
@@ -67,13 +77,14 @@
                                     <span class="input-group-text rounded"><i class="fa fa-thermometer-three-quarters"
                                             aria-hidden="true"></i></span>
                                 </div>
-                                <input type="text" class="form-control rounded" value="{{temperatura}}" name="temperatura" placeholder="Temperatura">
+                                <input type="text" class="form-control rounded" value="{{temperatura}}"
+                                    name="temperatura" placeholder="Temperatura">
                             </div>
                         </div>
                         <div class="col-md-6 mb-3 text-white">
-                            <label >Género</label>
-                            <select class="custom-select d-block w-100 rounded" value="{{visitGenero}}{{genero}}" name="genero">
-                                <option value="">Selecionar</option>
+                            <label>Género</label>
+                            <select class="custom-select d-block w-100 rounded" title="Genero" name="genero">
+                                <option>{{visitGenero}}{{genero}}</option>
                                 <option>Hombre</option>
                                 <option>Mujer</option>
                                 <option>Otro</option>
@@ -87,18 +98,20 @@
                             <label>Dirección de Residencia</label>
                             <div class="input-group rounded">
                                 <div class="input-group-prepend ">
-                                    <span class="input-group-text rounded"><i class="fa fa-home" aria-hidden="true"></i></span>
+                                    <span class="input-group-text rounded"><i class="fa fa-home"
+                                            aria-hidden="true"></i></span>
                                 </div>
-                                <input type="text" class="form-control rounded" value="{{visitDireccion}}{{direccion}}" name="direccion" placeholder="Dirección"
-                                   >
-                                
+                                <input type="text" class="form-control rounded" value="{{visitDireccion}}{{direccion}}"
+                                    name="direccion" placeholder="Dirección">
+
                             </div>
                         </div>
 
                         <div class="col-md-6 mb-3 text-white">
                             <label>Lugar de visita</label>
-                            <select class="custom-select d-block w-100 rounded" value="{{lugarVisita}}" name="lugarVisita">
-                                <option value="">Selecionar</option>
+                            <select class="custom-select d-block w-100 rounded" title="Lugar de visita"
+                                name="lugarVisita">
+                                <option>seleccionar</option>
                                 <option>Laboratorios</option>
                                 <option>Oficinas Falcultad</option>
                                 <option>Registro y control</option>
@@ -108,8 +121,9 @@
                         </div>
                         <div class="col-md-6 mb-3 text-white">
                             <label>Rol de visitante</label>
-                            <select class="custom-select d-block w-100 rounded" value="{{Rol_visitante}}" name="Rol_visitante">
-                                <option value="">{{visitRol_visitante}}</option>
+                            <select class="custom-select d-block w-100 rounded" title="Rol visitante"
+                                name="Rol_visitante">
+                                <option>{{visitRol_visitante}}{{Rol_visitante}}</option>
                                 <option>Estudiante</option>
                                 <option>Docente</option>
                                 <option>Administrativo</option>
@@ -118,14 +132,16 @@
                         </div>
                         <div class="col-md-6 mb-3 text-white">
                             <label>Nota de Visita</label>
-                            <textarea type="text" class="form-control rounded" value="{{nota}}" name="nota" placeholder=""></textarea>
+                            <textarea type="text" class="form-control rounded" value="{{visitNota}}{{nota}}" name="nota"
+                                placeholder=""></textarea>
                         </div>
                     </div>
-                     <hr>
-                    <div class="row"> 
-                        <div class="col-md-3 mb-3">  <button class="btn btn-primary btn-lg btn-block rounded " type="submit">Registar Ingreso</button></div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-3 mb-3"> <button class="btn btn-primary btn-lg btn-block rounded "
+                                type="submit">Registar Ingreso</button></div>
                     </div>
-                  
+
                 </form>
             </div>
         </div>

@@ -37,11 +37,11 @@
       <td>{{date}}</td>
       <td>{{nota}}</td>
       <td>
-        <a href="/visitas/actualizarVisita/{{_id}}"><i class=" btn btn-primary btn-block btn-sm fas fa-edit"></i></a> 
+        <a href="/visitas/actualizarVisita/{{_id}}"><i class=" btn btn-primary btn-block btn-sm fas fa-edit">Editar</i></a> 
       <br/> 
        <form action="/visitas/salirVisita/{{_id}}?_method=DELETE" method="POST">
           <input type="hidden" name="_method" value="DELETE">
-          <button type="submit" class="btn btn-danger btn-block btn-sm">Eliminar</button>
+          <button type="submit" class="btn btn-danger btn-block btn-sm"><i class="fas fa-door-open">Salir</i></button>
         </form>
         </td>
     </tr>
