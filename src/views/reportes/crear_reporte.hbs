@@ -5,61 +5,53 @@
 
             <div class="col-md-6 order-md-1 ">
                 <label> Barra de busqueda individal - Cedula </label>
-                <form class="form-inline my-2 my-lg-0 col-md-0 mb-3 " action="/reportes/buscadorVisitasReporte" method="POST">
+                <form class="form-inline my-2 my-lg-0 col-md-0 mb-3 " action="/reportes/buscadorVisitasReporte"
+                    method="POST">
                     <input class="form-control mr-sm-2 rounded" name="cedula" placeholder="Buscar por cédula">
                     <button class="btn btn-primary my-2 my-sm-0 rounded " type="submit">Buscar y Descargar</button>
                 </form>
             </div>
 
+
+
             <div class="col-md-6 order-md-2 mb-4">
+                <h2>
+                   <strong>Recomendaciones</strong> 
+                </h2>
+
+                <p>
+                    
+                </p>
                 <form method="POST" action="../reportes/crearReporte">
 
                     <label>Dándo click en el siguiente botón se creará un informe con los usuarios que ingresaron y
-                        salieron de laUniversidad Surcolombiana hasta la fecha.</label>
+                        salieron de la Universidad Surcolombiana hasta la fecha.</label>
                     <button class="btn btn-success btn-lg btn-block rounded " type="submit">Crear reporte en
                         Pdf</button>
                 </form>
             </div>
         </div>
 
+        <div class="">
+
+            <div class="col-md-6 order-md-1 ">
+
+                <form class="form-inline my-2 my-lg-0 col-md-0 mb-3" action="/reportes/filtroFechas" method="POST">
+                    <div class="form-group col-md-6 mb-3 text-white">
+                        <label>Fecha inicio de la busqueda </label>
+                        <input class="form-control mr-sm-2 rounded" name="fechaInicio" placeholder="Ejemplo 01-01-2020">
+                 
+                        <label>Fecha final de la busqueda</label>
+                        <input class="form-control mr-sm-2 rounded" name="fechaFin" placeholder="Ejemplo 2020-01-01">
+                    </div>
+                    <button class="btn btn-primary my-2 my-sm-0 rounded " type="submit">buscar</button>
+                </form>
+            </div>
+        </div>
+
+
+
         <hr>
-        <table class="table table-striped rounded" aria-haspopup="true">
-            <thead class="thead-white text-black">
-
-                <th scope="col">Nombres - Apellidos</th>
-                <th scope="col">Cédula</th>
-                <th scope="col">Teléfono</th>
-                <th scope="col">Temperatura</th>
-                <th scope="col">Género</th>
-                <th scope="col">Lugar de visita</th>
-                <th scope="col">Rol Visitante</th>
-                <th scope="col">Fecha - Hora de entrada</th>
-                 <th scope="col">Fecha - Hora de Salida</th>
-                <th scope="col">Nota</th>
-                </tr>
-            </thead>
-
-            <tbody class="tbody-white">
-                {{#each Visitante}}
-                <tr>
-                    <td>{{nombres}}</td>
-                    <td>{{cedula}}</td>
-                    <td>{{telefono}}</td>
-                    <td>{{temperatura}} grados</td>
-                    <td>{{genero}}</td>
-                    <td>{{lugarVisita}}</td>
-                    <td>{{Rol_visitante}}</td>
-                    <td>{{dateEntrada}}</td>
-                    <td>{{dateSalida}}</td>
-                    <td>{{nota}}</td>
-                </tr>
-
-                {{/each}}
-
-           
-            </tbody>
-        </table>
-
 
     </div>
 
