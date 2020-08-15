@@ -33,7 +33,7 @@ router.post('/reportes/crearReporte', async (req, res, next) => {
         reportes.push(doc);
     }
 
-    console.log('reportesArray: ', reportes.length);
+    
 
     const pdfdata = [];
     pdfdata.push([
@@ -58,10 +58,10 @@ router.post('/reportes/crearReporte', async (req, res, next) => {
             { text: String(reportes[i].dateEntrada) },
             { text: String(reportes[i].dateSalida) },
         ]);
-        console.log('fila: ' + i, pdfdata);
+        
 
     }
-    console.log(pdfdata.length);
+    
 
 
 
@@ -91,7 +91,7 @@ router.post('/reportes/crearReporte', async (req, res, next) => {
         res.writeHead(200,
             {
                 'Content-Type': 'application/pdf',
-                'Content-Disposition': 'attachment;filename="filename.pdf"'
+                'Content-Disposition': 'attachment;filename="Reporte_general.pdf"'
             });
 
         const download = Buffer.from(data.toString('utf-8'), 'base64');
@@ -111,7 +111,7 @@ router.post("/reportes/buscadorVisitasReporte", async (req, res) =>{
         reportes.push(doc);
     }
 
-    console.log('reportesArray: ', reportes.length);
+    
 
     const pdfdata = [];
     pdfdata.push([
@@ -161,7 +161,7 @@ router.post("/reportes/buscadorVisitasReporte", async (req, res) =>{
         res.writeHead(200,
             {
                 'Content-Type': 'application/pdf',
-                'Content-Disposition': 'attachment;filename="filename.pdf"'
+                'Content-Disposition': 'attachment;filename="Reporte_por_cedula.pdf"'
             });
 
         const download = Buffer.from(data.toString('utf-8'), 'base64');
@@ -183,8 +183,7 @@ router.post("/reportes/filtroFechas" ,async (req,res)=>{
         reportes.push(doc);
     }
 
-    console.log('reportesArray: ', reportes.length);
-
+    
     const pdfdata = [];
     pdfdata.push([
         { text: 'Nombres' },

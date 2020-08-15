@@ -2,52 +2,56 @@
 
     <div class="jumbotron p-4 p-md-12  rounded ">
         <div class="row">
-
-            <div class="col-md-6 order-md-1 ">
-                <label> Barra de busqueda individal - Cedula </label>
-                <form class="form-inline my-2 my-lg-0 col-md-0 mb-3 " action="/reportes/buscadorVisitasReporte"
-                    method="POST">
-                    <input class="form-control mr-sm-2 rounded" name="cedula" placeholder="Buscar por cédula">
-                    <button class="btn btn-primary my-2 my-sm-0 rounded " type="submit">Buscar y Descargar</button>
-                </form>
-            </div>
-
-
-
-            <div class="col-md-6 order-md-2 mb-4">
+            <div class="col-md-6 order-md-1 mb-4">
                 <h2>
                    <strong>Recomendaciones</strong> 
                 </h2>
 
-                <p>
+                <p>Para la impresión por fechas recomienda lo siguiente:<br>
+                    -Para separar las fechas por ejemplo el dia, el mes, el año, usar un guión ("-")<br>
+                    -En el campo de fecha final <strong>SIEMPRE</strong> poner un día después del buscado, por ejmplo si se quiere imprimir de x fecha hasta la fecha actual el día sería el siguiente al de la fecha actual<br>
+                    -No pueden ir vacíos ninguno de los dos campos, si se quiere imprimir todos los registros está el botón de crear reporte en pdf y si se quiere imprimir el reporte de una sola cedula, existe el respectivo botón<br>
                     
                 </p>
+                
+            </div>
+            <div class="col-md-6 order-md-2 mb-4">
                 <form method="POST" action="../reportes/crearReporte">
 
                     <label>Dándo click en el siguiente botón se creará un informe con los usuarios que ingresaron y
                         salieron de la Universidad Surcolombiana hasta la fecha.</label>
                     <button class="btn btn-success btn-lg btn-block rounded " type="submit">Crear reporte en
                         Pdf</button>
+                </form><hr>
+                <label> Barra de busqueda individal - Cédula </label>
+                <form class="form-inline my-2 my-lg-2 col-md-0 mb-3 " action="/reportes/buscadorVisitasReporte"
+                    method="POST">
+                        <input class="form-control mr-sm-2 rounded" name="cedula" placeholder="Buscar por cédula"> 
+                    <button class="btn btn-primary my-2 my-sm-0 rounded " type="submit">Buscar y Descargar</button>
                 </form>
-            </div>
-        </div>
-
-        <div class="">
-
-            <div class="col-md-6 order-md-1 ">
-
-                <form class="form-inline my-2 my-lg-0 col-md-0 mb-3" action="/reportes/filtroFechas" method="POST">
-                    <div class="form-group col-md-6 mb-3 text-white">
-                        <label>Fecha inicio de la busqueda </label>
-                        <input class="form-control mr-sm-2 rounded" name="fechaInicio" placeholder="Ejemplo 01-01-2020">
-                 
-                        <label>Fecha final de la busqueda</label>
-                        <input class="form-control mr-sm-2 rounded" name="fechaFin" placeholder="Ejemplo 2020-01-01">
+                <hr>
+                <label >Barra de busqueda por fecha </label>
+                <form class="form-inline my-2 my-lg-2 col-md-0 mb-3" action="/reportes/filtroFechas" method="POST">
+                    <div class="form-group col-md-6 mb-3 ">
+                        
+                        <input class="form-control mr-sm-2 rounded" name="fechaInicio" placeholder="Fecha inicial AAAA-MM-DD" required>
                     </div>
-                    <button class="btn btn-primary my-2 my-sm-0 rounded " type="submit">buscar</button>
+                    <div class="form-group col-md-6 mb-3 ">
+                        
+                        <input class="form-control mr-sm-2 rounded" name="fechaFin" placeholder="Fecha final AAAA-MM-DD" required>
+                    </div>
+                    <button class="btn btn-primary my-2 my-sm-0 rounded " type="submit">Buscar</button>
                 </form>
+                
+                </div>
             </div>
+
+
+            
         </div>
+
+            
+        
 
 
 

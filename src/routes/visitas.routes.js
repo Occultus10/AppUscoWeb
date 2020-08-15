@@ -29,8 +29,8 @@ router.post('/visitas/nuevaVisita', isAuthenticated, [
 
     const { nombres, cedula, email, telefono, temperatura, genero, direccion, lugarVisita, nota, Rol_visitante } = req.body;
     const errors = validationResult(req).array();
-    if(temperatura<34 || temperatura > 38){
-       errors.push({msg: "Valor de Temperarura no valido.", value:"",param:"temperatura", location:"body"});
+    if(temperatura<= 35 || temperatura >= 38){
+       errors.push({msg: "Valor de Temperatura no válido.", value:"",param:"temperatura", location:"body"});
     }
 
     if (errors.length > 0) {
