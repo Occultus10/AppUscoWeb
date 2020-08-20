@@ -4,7 +4,7 @@ const router = express.Router();
 const { check, validationResult } = require('express-validator');
 //____
 const { isAuthenticated } = require("../helpers/auth");
-const { renderVisitasForm, agregarVisita, renderVisitasTable, renderActualizarVisitasForm, salidaVisitas, buscador,buscadorVisitasRecientes } = require("../controllers/visitas.controller");
+const { renderVisitasForm, agregarVisita, renderVisitasTable, renderActualizarVisitasForm, salidaVisitas, buscador,buscadorVisitasRecientes,finJornada } = require("../controllers/visitas.controller");
 const Visita = require("../models/Visita");
 const VisitaSaliente = require("../models/VisitaSaliente"); 
 const visitasCtrl = require("../controllers/visitas.controller");
@@ -29,8 +29,12 @@ router.post('/visitas/nuevaVisita', isAuthenticated, [
 
     const { nombres, cedula, email, telefono, temperatura, genero, direccion, lugarVisita, nota, Rol_visitante } = req.body;
     const errors = validationResult(req).array();
-    if(temperatura<= 35 || temperatura >= 38){
-       errors.push({msg: "Valor de Temperatura no válido.", value:"",param:"temperatura", location:"body"});
+
+
+    if(temperatura<= 35){
+       errors.push({msg: "Valor de Temperatura no válida por ser muy baja.", value:"",param:"temperatura", location:"body"});
+    }else if (temperatura >= 38){
+        errors.push({msg: "Valor de Temperatura no válida por ser muy alta", value:"",param:"temperatura", location:"body"});
     }
 
     if (errors.length > 0) {
@@ -95,5 +99,14 @@ router.put("/visitas/actualizarVisita/:id", isAuthenticated, [
 router.post("/visitas/buscador",buscador); 
 
 router.post("/visitas/buscadorVisitasRecientes",buscadorVisitasRecientes); 
+
+router.get("/visitas/finJornada", async (req,res)=>{
+    const Visitas = await Visita.find()
+		.sort({ date: "desc" })
+		.lean();
+	res.render("visitas/finJornada_visita", { Visitas });
+} );
+
+router.post("/visitas/finJornada",finJornada); 
 
 module.exports = router;

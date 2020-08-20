@@ -183,7 +183,6 @@ router.post("/reportes/filtroFechas" ,async (req,res)=>{
         reportes.push(doc);
     }
 
-    
     const pdfdata = [];
     pdfdata.push([
         { text: 'Nombres' },
@@ -205,7 +204,7 @@ router.post("/reportes/filtroFechas" ,async (req,res)=>{
             { text: String(reportes[i].dateEntrada) },
             { text: String(reportes[i].dateSalida) },
         ]);
-       // console.log('fila: ' + i, pdfdata);
+      
     }
     documentDefinition = {
         content: [
