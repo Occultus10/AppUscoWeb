@@ -21,20 +21,19 @@
               Acciones 
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="/visitas/Visitas">Ingresos Activos</a>
-              <a class="dropdown-item" href="/visitas/nuevaVisita">Agregar Visitante nuevo</a>
-              <a class="dropdown-item" href="/reportes/crearReporte">Generar Reporte Diario</a>
+              <a class="dropdown-item" href="/visitas/Visitas">Ingresos activos</a>
+              <a class="dropdown-item" href="/visitas/nuevaVisita">Agregar visitante nuevo</a>
+              <a class="dropdown-item" href="/reportes/crearReporte">Generar Reportes</a>
+              <a class="dropdown-item" href="/reportes/sintomas">Reporte de Sintomas</a>
               <a class="dropdown-item" href="/visitas/finJornada">Terminar la jornada</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="/users/logout">Cerrar sesión</a>
+              <a class="dropdown-item" href="/users/signup">Registrar nueva cuenta de usuario</a>
             </div>
           </li>
         {{else}}
           <li class="nav-item">
             <a class="nav-link" href="/users/signin">Ingresar</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/users/signup">Registrarse</a>
           </li>
         {{/if}}
       </ul>

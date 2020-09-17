@@ -16,7 +16,7 @@ const { isAuthenticated, isNotAuthenticated } = require("../helpers/auth");
 
 
 // Routes
-router.get("/users/signup" ,renderSignUpForm);
+router.get("/users/signup" ,adminAuth, isAuthenticated, renderSignUpForm);
 
 router.post("/users/signup", [
   
@@ -54,6 +54,6 @@ router.get("/users/signin", renderSigninForm);
 
 router.post("/users/signin", signin);
 
-router.get("/users/logout", logout);
+router.get("/users/logout", isAuthenticated, logout);
 
 module.exports = router;

@@ -7,6 +7,7 @@ const { isAuthenticated } = require("../helpers/auth");
 const { renderVisitasForm, agregarVisita, renderVisitasTable, renderActualizarVisitasForm, salidaVisitas, buscador,buscadorVisitasRecientes,finJornada } = require("../controllers/visitas.controller");
 const Visita = require("../models/Visita");
 const VisitaSaliente = require("../models/VisitaSaliente"); 
+const VisitaSintomas = require("../models/VisitaSintomas")
 const visitasCtrl = require("../controllers/visitas.controller");
 //____
 router.get("/visitas/nuevaVisita", isAuthenticated, renderVisitasForm);
@@ -19,11 +20,12 @@ router.post('/visitas/nuevaVisita', isAuthenticated, [
     check('cedula').not().isEmpty().withMessage('Un numero de cedula es requerido').isLength({ min: 5 }).withMessage('Cedula no valida'),
     check('email').not().isEmpty().withMessage('Email es requerido').isEmail().withMessage('Email no es valido'),
     check('telefono').not().isEmpty().withMessage('Email es requerido').isLength({ min: 7 }).withMessage('Telefono muy corto').isNumeric().withMessage('No se admiten letras'),
-    check('temperatura').not().notEmpty().isNumeric().withMessage('Valor de Temperarura no valido.'),
+    check('temperatura').not().isEmpty().isNumeric().withMessage('Valor de Temperarura no valido.'),
     check('genero').not().isEmpty().withMessage('Debe escoger un Genero de los disponibles'),
     check('direccion').not().isEmpty().withMessage('Una Direccion es requerida'),
     check('lugarVisita').not().isEmpty().withMessage('Es necesario escojer un lugar de visita'),
     check('Rol_visitante').not().isEmpty().withMessage('Es necesario escojer un rol de usuario'),
+    check("nota").isLength({max:90}).withMessage('Nota muy larga'),
 ], async (req, res) => {
 
 
@@ -32,15 +34,25 @@ router.post('/visitas/nuevaVisita', isAuthenticated, [
 
 
     if(temperatura<= 35){
-       errors.push({msg: "Valor de Temperatura no válida por ser muy baja.", value:"",param:"temperatura", location:"body"});
+        const newVisitaSintomas = new VisitaSintomas({ nombres, cedula, email, telefono, temperatura,direccion, nota, Rol_visitante });
+        await newVisitaSintomas.save();
+        console.log("Datos de sintomas guardados");
+        req.flash("success_msg", "Datos de sintomas guardados");
+       errors.push({msg: "Valor de Temperatura no válida por ser muy baja. Entrada  NO PERMITIDA", value:"",param:"temperatura", location:"body"},
+       {msg: "La Temperatura corporal corresponde a sintomas. DATOS ALMACENADOS PARA REPORTE DE SINTOMAS", value:"",param:"temperatura" ,location:"body"});
     }else if (temperatura >= 38){
-        errors.push({msg: "Valor de Temperatura no válida por ser muy alta", value:"",param:"temperatura", location:"body"});
+        const newVisitaSintomas = new VisitaSintomas({ nombres, cedula, email, telefono, temperatura,direccion, nota, Rol_visitante });
+        await newVisitaSintomas.save();
+        console.log("Datos de sintomas guardados");
+        req.flash("success_msg", "Datos de sintomas guardados");
+        errors.push({msg: "Valor de Temperatura no válida por ser muy alta. Entrada  NO PERMITIDA", value:"",param:"temperatura", location:"body"},
+        {msg: "La Temperatura corporal corresponde a sintomas. DATOS ALMACENADOS PARA REPORTE DE SINTOMAS", value:"",param:"temperatura" ,location:"body"});
     }
 
     if (errors.length > 0) {
         req.session.errors = errors;
         req.session.success = false;
-        console.log('mensaje de error', errors[0].msg);
+       
         res.render('visitas/nueva_visita', { errors, nombres, cedula, email, telefono, temperatura, genero, direccion, lugarVisita, nota, Rol_visitante }); 
         req.session.success = true;
     } else {
@@ -66,6 +78,8 @@ router.put("/visitas/actualizarVisita/:id", isAuthenticated, [
     check('direccion').not().isEmpty().withMessage('Una Direccion es requerida'),
     check('lugarVisita').not().isEmpty().withMessage('Es necesario escojer un lugar de visita'),
     check('Rol_visitante').not().isEmpty().withMessage('Es necesario escojer un rol de usuario'),
+    check("nota").isLength({max:90}).withMessage('Nota muy larga'),
+    
 
 ], async (req, res) => {
     
@@ -81,7 +95,6 @@ router.put("/visitas/actualizarVisita/:id", isAuthenticated, [
         req.session.errors = errors;
         req.session.success = false;
 
-        console.log('mensaje de error', errors[0].msg);
         res.render('visitas/actualizar_visita', { errors, _id, nombres, cedula, email, telefono, temperatura, genero, direccion, lugarVisita, nota, Rol_visitante });
         req.session.success = true;
     } else {

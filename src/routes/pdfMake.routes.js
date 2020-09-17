@@ -8,6 +8,7 @@ const { isAuthenticated } = require("../helpers/auth");
 const { adminAuth } = require("../helpers/userAdmin")
 
 const VisitaSaliente = require("../models/VisitaSaliente");
+const VisitaSintomas = require('../models/VisitaSintomas');
 
 
 pdfMake.vfs = vfsFonts.pdfMake.vfs;
@@ -15,6 +16,75 @@ pdfMake.vfs = vfsFonts.pdfMake.vfs;
 router.get("/reportes/crearReporte", adminAuth,isAuthenticated,  (req, res) => {
     res.render('reportes/crear_reporte');
 
+});
+router.get("/reportes/sintomas", isAuthenticated,  async (req, res) => {
+    const Visitas = await VisitaSintomas.find()
+		.sort({ date: "desc" })
+		.lean();
+	
+    res.render('reportes/sintomas_reporte',{ Visitas });
+
+});
+router.post("/reportes/sintomas", async (req, res, next) => {
+    const Visitas = VisitaSintomas.find();
+    const reportes = [];
+    for await (const doc of Visitas) {
+        reportes.push(doc);
+    }
+    const pdfdata = [];
+    pdfdata.push([
+        { text: 'Nombres' },
+        { text: 'Cedula' },
+        { text: 'Telefono' },
+        { text: 'Direccion' },
+        { text: 'Rol vistante' },
+        { text: 'Temperarura' },
+        { text: 'Fecha' },
+        
+        {text: 'Notas'}
+
+    ]);
+    for (i = 0; i < reportes.length; i++) {
+    
+        pdfdata.push([
+            { text: reportes[i].nombres },
+            { text: reportes[i].cedula },
+            { text: reportes[i].telefono },
+            { text: reportes[i].direccion },
+            { text: reportes[i].Rol_visitante },
+            {text: reportes[i].temperatura ,background: 'pink'},
+            { text: String(reportes[i].date) },
+            {text: reportes[i].nota}
+        ]);
+    }
+    var documentDefinition = {
+        pageOrientation: 'landscape',
+        content: [
+            { text: 'REPORTE UNIVERSIDAD SURCOLOMBIANA', style: 'header ' },
+
+
+            { text: 'La siguiente tabla contiene el reporte de sintomas encontrados en la base de datos', style: 'subheader' },
+
+            {
+                style: 'tableExample',
+                table: {
+                    body: pdfdata
+                }
+            }
+        ]
+    };
+
+    const pdfDoc = pdfMake.createPdf(documentDefinition);
+    pdfDoc.getBase64((data) => {
+        res.writeHead(200,
+            {
+                'Content-Type': 'application/pdf',
+                'Content-Disposition': 'attachment;filename="Reporte_general_sintomas.pdf"'
+            });
+
+        const download = Buffer.from(data.toString('utf-8'), 'base64');
+        res.end(download);
+    });
 });
 router.post('/reportes/crearReporte', async (req, res, next) => {
     //res.send('PDF');
@@ -43,7 +113,8 @@ router.post('/reportes/crearReporte', async (req, res, next) => {
         { text: 'Direccion' },
         { text: 'Lugar de Visita' },
         { text: 'Hora entrada' },
-        { text: 'Hora salida' }
+        { text: 'Hora salida' },
+        {text: 'Notas'}
 
     ]);
 
@@ -57,20 +128,17 @@ router.post('/reportes/crearReporte', async (req, res, next) => {
             { text: reportes[i].lugarVisita },
             { text: String(reportes[i].dateEntrada) },
             { text: String(reportes[i].dateSalida) },
+            {text: reportes[i].nota}
         ]);
         
 
     }
-    
-
-
-
-
-
+ 
     //pdfdata.push([{text: reportes[0].nota}],[{text:reportes[4].nota}]); 
     // console.log(pdfdata[2]);
 
     var documentDefinition = {
+        pageOrientation: 'landscape',
         content: [
             { text: 'REPORTE UNIVERSIDAD SURCOLOMBIANA', style: 'header ' },
 
@@ -121,7 +189,8 @@ router.post("/reportes/buscadorVisitasReporte", async (req, res) =>{
         { text: 'Direccion' },
         { text: 'Lugar de Visita' },
         { text: 'Hora entrada' },
-        { text: 'Hora salida' }
+        { text: 'Hora salida' },
+        {text: 'Notas'}
 
     ]);
 
@@ -135,6 +204,7 @@ router.post("/reportes/buscadorVisitasReporte", async (req, res) =>{
             { text: reportes[i].lugarVisita },
             { text: String(reportes[i].dateEntrada) },
             { text: String(reportes[i].dateSalida) },
+            {text: reportes[i].nota}
         ]);
        // console.log('fila: ' + i, pdfdata);
     }
@@ -191,7 +261,8 @@ router.post("/reportes/filtroFechas" ,async (req,res)=>{
         { text: 'Direccion' },
         { text: 'Lugar de Visita' },
         { text: 'Hora entrada' },
-        { text: 'Hora salida' }
+        { text: 'Hora salida' },
+        {text: 'Notas'}
 
     ]);
     for (i = 0; i < reportes.length; i++) {
@@ -203,10 +274,12 @@ router.post("/reportes/filtroFechas" ,async (req,res)=>{
             { text: reportes[i].lugarVisita },
             { text: String(reportes[i].dateEntrada) },
             { text: String(reportes[i].dateSalida) },
+            {text: reportes[i].nota}
         ]);
       
     }
     documentDefinition = {
+        pageOrientation: 'landscape',
         content: [
             { text: 'REPORTE UNIVERSIDAD SURCOLOMBIANA', style: 'header ' },
             { text: 'La siguiente tabla contiene el ingreso y salida de las personas a la universidad Surcolombiana.', style: 'subheader' },            {

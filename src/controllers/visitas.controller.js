@@ -86,8 +86,42 @@ visitasCtrl.buscador = async (req, res) => {
 };
 
 visitasCtrl.buscadorVisitasRecientes = async (req, res) => {
+	const Visitas = VisitaSaliente.find({ cedula: req.body.cedula }, function (err, data) {
+		console.log('Errors: ' + err, 'Data length: ', data);
 
-	const visita = VisitaSaliente.findOne({ cedula: req.body.cedula });
+		//console.log('Reportes : ', reportes);
+		if (data.length === 0) {
+			req.flash("error_msg", "Usuario no encontrado");
+			res.redirect("/visitas/nuevaVisita");
+		}else{
+			const reportes = [];
+		for (doc of data) {
+			reportes.push(doc)
+		}
+
+		for (i = 0; i < 1; i++) {
+			const visitNombres = reportes[i].nombres;
+			const visitCedula = reportes[i].cedula;
+			const visitEmail = reportes[i].email;
+			const visitTelefono = reportes[i].telefono;
+			const visitGenero = reportes[i].genero;
+			const visitDireccion = reportes[i].direccion;
+			const visitRol_visitante = reportes[i].Rol_visitante;
+
+			res.render("visitas/nueva_visita", {
+				visitNombres,
+				visitCedula,
+				visitTelefono,
+				visitRol_visitante,
+				visitDireccion,
+				visitGenero,
+				visitEmail
+			});
+		}
+		}
+	});
+
+	/*const visita = VisitaSaliente.findOne({ cedula: req.body.cedula });
 	if (visita) {
 		const reportes = [];
 		for await (doc of visita) {
@@ -116,7 +150,7 @@ visitasCtrl.buscadorVisitasRecientes = async (req, res) => {
 	} else {
 		req.flash("error_msg", "registro no encontrado");
 		res.redirect("visitas/nuevaVisita");
-	}
+	}*/
 
 };
 

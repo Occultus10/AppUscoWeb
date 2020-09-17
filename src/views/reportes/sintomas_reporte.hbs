@@ -1,0 +1,48 @@
+ <div class="col-md-6 mb-4" >
+                <form method="POST" action="/reportes/sintomas">
+                    <button  class="btn btn-danger btn-lg btn-block rounded " type="submit">Imprimir Reporte General de sintomas</button>
+                </form>
+ </div>
+<table class="table table-striped rounded" aria-haspopup="true" >
+  <thead  class="thead-white text-black">
+      
+      <th scope="col">Nombres - Apellidos</th>
+      <th scope="col">Cédula</th>
+      <th scope="col">Teléfono</th>
+      <th scope="col">Temperatura</th>
+      <th scope="col">Rol Visitante</th>
+      <th scope="col">Fecha</th>
+      <th scope="col">Nota</th>
+    </tr>
+  </thead>
+
+  <tbody class="tbody-white">
+    {{#each Visitas}} 
+    <tr>
+      <td>{{nombres}}</td>
+      <td>{{cedula}}</td>
+      <td>{{telefono}}</td>
+      <td>{{temperatura}} grados</td>
+      <td>{{Rol_visitante}}</td>
+      <td>{{date}}</td>
+      <td>{{nota}} </td>
+    </tr>
+    
+     {{/each}}
+  </tbody>
+</table>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script>
+  
+  //Cuando la página esté cargada completamente
+  $(document).ready(function(){
+    //Cada 10 segundos (10000 milisegundos) se ejecutará la función refrescar
+    setTimeout(refrescar, 300000);
+  });
+  function refrescar(){
+    //Actualiza la página
+    location.reload();
+  }
+</script>
