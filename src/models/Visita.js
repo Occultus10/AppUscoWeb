@@ -4,7 +4,7 @@ const VisitaSchema = new Schema(
 {
     nombres: { type: String, required: true },
     cedula: { type: Number, required: true },
-    email: { type: String, required: true , default:'Email vacio'},
+    email: { type: String, required: true },
     telefono: { type: Number, required: true },
     temperatura: { type: Number, required: true },
     genero: { type: String, required: true },

@@ -13,7 +13,7 @@ const VisitaSintomas = require('../models/VisitaSintomas');
 
 pdfMake.vfs = vfsFonts.pdfMake.vfs;
 
-router.get("/reportes/crearReporte", adminAuth,isAuthenticated,  (req, res) => {
+router.get("/reportes", adminAuth,isAuthenticated,  (req, res) => {
     res.render('reportes/crear_reporte');
 
 });
@@ -168,9 +168,14 @@ router.post('/reportes/crearReporte', async (req, res, next) => {
 });
 
 
-router.post("/reportes/buscadorVisitasReporte", async (req, res) =>{
+router.post("/reportes/buscadorCedulaReporte", async (req, res) =>{
+  
+    if(!req.body.cedula || req.body.cedula.length<= 4){
+        req.flash("error_msg", "Un numero de celula es requerido o no valido");
+        res.redirect("/reportes");
+    } else {
 
-    const Visitante = await VisitaSaliente.find({cedula : req.body.cedula}).sort({ date: "desc" }).lean();
+        const Visitante = await VisitaSaliente.find({cedula : req.body.cedula}).sort({ date: "desc" }).lean();
 
     //res.render('reportes/crear_reporte',{Visitante});
 
@@ -236,7 +241,10 @@ router.post("/reportes/buscadorVisitasReporte", async (req, res) =>{
 
         const download = Buffer.from(data.toString('utf-8'), 'base64');
         res.end(download);
-    });
+    }); 
+    }
+
+   
 
     //const NewrReporteRealizado = new ReporteRealizado ({registroVisita: "Reporte con fecha 15/0820", fechaImpresion :moment().format()}); 
     //console.log(NewrReporteRealizado); 

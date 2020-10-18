@@ -11,7 +11,7 @@
 <div class="Container ">
     <div style="background-color:#4D626C" class="jumbotron p-4 p-md-12  rounded ">
         <form class="form-inline my-2 my-lg-0 col-md-0 mb-3 " action="/visitas/buscadorVisitasRecientes" method="POST">
-            <input class="form-control mr-sm-2 rounded" name="cedula" placeholder="Buscar por cédula">
+            <input class="form-control mr-sm-2 rounded" name="cedula" placeholder="Buscar por cédula"  required>
             <button class="btn btn-primary my-2 my-sm-0 rounded " type="submit">Buscar</button>
         </form>
         <hr>
@@ -28,6 +28,8 @@
                     -Lugar de visita<br>
                     -Nota de visita<br>
                 </h5>
+                <hr>
+                <h5>Un valor nulo o vacío de la temperatura el sistema lo asume como un síntoma por estar de bajo de 35 Grados.</h5>
             </div>
             <div class="col-md-8 order-md-1">
                 <h4 class="mb-3 text-white"><strong>FORMULARIO DE INGRESO</strong></h4>
@@ -36,12 +38,12 @@
                         <div class="form-group col-md-6 mb-3 text-white">
                             <label for="firstName">Nombre y Apellido</label>
                             <input type="text" class="form-control rounded" value="{{visitNombres}}{{nombres}}"
-                                name="nombres" placeholder="Nombre y apellido">
+                                name="nombres" placeholder="Nombre y apellido"  required>
                         </div>
                         <div class="col-md-6 mb-3 text-white">
                             <label for="lastName">Cédula</label>
                             <input type="text" class="form-control rounded" value="{{visitCedula}}{{cedula}}"
-                                name="cedula" placeholder="Cédula" />
+                                name="cedula" placeholder="Cédula"  required>
                         </div>
                     </div>
 
@@ -49,7 +51,7 @@
                         <div class="col-md-6 mb-3 text-white">
                             <label for="email">E-mail <span class="text-muted">(Opcional)</span></label>
                             <input type="email" class="form-control rounded" value="{{visitEmail}}{{email}}"
-                                name="email" placeholder="you@example.com">
+                                name="email" placeholder="miEmail@ejemplo.com"  required>
                         </div>
                         <div class="col-md-6 mb-3 text-white">
                             <label for="username">Teléfono</label>
@@ -59,7 +61,7 @@
                                             aria-hidden="true"></i></span>
                                 </div>
                                 <input type="text" class="form-control rounded" value="{{visitTelefono}}{{telefono}}"
-                                    name="telefono" placeholder="Teléfono">
+                                    name="telefono" placeholder="Teléfono"  required>
                             </div>
                         </div>
                     </div>
@@ -73,7 +75,7 @@
                                             aria-hidden="true"></i></span>
                                 </div>
                                 <input type="text" class="form-control rounded" value="{{temperatura}}"
-                                    name="temperatura" placeholder="Temperatura">
+                                    name="temperatura" placeholder="Temperatura"  required>
                             </div>
                         </div>
                         <div class="col-md-6 mb-3 text-white">
@@ -96,7 +98,7 @@
                                             aria-hidden="true"></i></span>
                                 </div>
                                 <input type="text" class="form-control rounded" value="{{visitDireccion}}{{direccion}}"
-                                    name="direccion" placeholder="Dirección">
+                                    name="direccion" placeholder="Dirección"  required>
                             </div>
                         </div>
 
