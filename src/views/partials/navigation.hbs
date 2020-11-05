@@ -1,8 +1,12 @@
+<link rel="stylesheet" href="/assets/css/theme.css">
+
 <nav style="background-color:#1E262B" class="navbar navbar-expand-lg navbar-dark ">
   <div class="container">
-    
-    <a class="navbar-brand" href="/" title="usco"><img src = "https://www.usco.edu.co/imagen-institucional/blanco/universidad-surcolombiana-p.png" alt="Usco"></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
+    <a class="navbar-brand" href="/" title="usco"><img
+        src="https://www.usco.edu.co/imagen-institucional/blanco/universidad-surcolombiana-p.png" alt="Usco"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
@@ -16,27 +20,37 @@
       </ul>-->
       <ul class="navbar-nav ml-auto">
         {{#if user}}
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Acciones 
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="/visitas/Visitas"> <i class="fa fa-male" aria-hidden="true"></i>  Ingresos activos</a>
-              <a class="dropdown-item" href="/visitas/nuevaVisita"> <i class="fa fa-arrow-right" aria-hidden="true"></i>  Agregar visitante nuevo</a>
-              <a class="dropdown-item" href="/reportes"><i class="fa fa-file-text" aria-hidden="true"></i>  Generar Reportes</a>
-              <a class="dropdown-item" href="/reportes/sintomas"><i class="fa fa-stethoscope" aria-hidden="true"></i> Reporte de Sintomas</a>
-              <a class="dropdown-item" href="/visitas/finJornada"><i class="fa fa-reply-all" aria-hidden="true"></i>  Terminar la jornada</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="/users/logout"><i class="fa fa-sign-out" aria-hidden="true"></i>  Cerrar sesión</a>
-              <a class="dropdown-item" href="/users/signup"><i class="fa fa-user-plus" aria-hidden="true"></i>  Registrar nueva cuenta de usuario</a>
-            </div>
-          </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Acciones
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/visitas/Visitas"> <i class="fa fa-male" aria-hidden="true"></i> Ingresos
+              activos</a>
+            <a class="dropdown-item" href="/visitas/nuevaVisita"> <i class="fa fa-arrow-right" aria-hidden="true"></i>
+              Agregar visitante nuevo</a>
+            <a class="dropdown-item" href="/reportes"><i class="fa fa-file-text" aria-hidden="true"></i> Generar
+              Reportes</a>
+            <a class="dropdown-item" href="/reportes/sintomas"><i class="fa fa-stethoscope" aria-hidden="true"></i>
+              Reporte de Sintomas</a>
+            <a class="dropdown-item" href="/visitas/finJornada"><i class="fa fa-reply-all" aria-hidden="true"></i>
+              Terminar la jornada</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/users/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Cerrar
+              sesión</a>
+            <a class="dropdown-item" href="/users/signup"><i class="fa fa-user-plus" aria-hidden="true"></i>Registrar
+              cuenta</a>
+          </div>
+        </li>
         {{else}}
-          <li class="nav-item">
-            <a class="nav-link" href="/users/signin">Ingresar</a>
-          </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/users/signin">Ingresar</a>
+        </li>
         {{/if}}
       </ul>
     </div>
   </div>
 </nav>
+
+<script src="/assets/js/theme.js"></script>

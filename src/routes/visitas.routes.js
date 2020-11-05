@@ -32,12 +32,7 @@ router.post('/visitas/nuevaVisita', isAuthenticated, [
     const { nombres, cedula, email, telefono, temperatura, genero, direccion, lugarVisita, nota, Rol_visitante } = req.body;
     const errors = validationResult(req).array();
 
-
-
-    if (errors.length > 0) {
-        req.session.errors = errors;
-        req.session.success = false;
-       
+ 
     if(temperatura<= 35){
 
         const newVisitaSintomas = new VisitaSintomas({ nombres, cedula, email, telefono, temperatura,direccion, nota, Rol_visitante });
@@ -54,9 +49,14 @@ router.post('/visitas/nuevaVisita', isAuthenticated, [
         errors.push({msg: "Valor de Temperatura no válida por ser muy alta. Entrada  NO PERMITIDA", value:"",param:"temperatura", location:"body"},
         {msg: "La Temperatura corporal corresponde a sintomas. DATOS ALMACENADOS PARA REPORTE DE SINTOMAS", value:"",param:"temperatura" ,location:"body"});
     }
-        res.render('visitas/nueva_visita', { errors, nombres, cedula, email, telefono, temperatura, genero, direccion, lugarVisita, nota, Rol_visitante }); 
+        
        
     
+
+    if (errors.length > 0) {
+        req.session.errors = errors;
+        req.session.success = false;
+        res.render('visitas/nueva_visita', { errors, nombres, cedula, email, telefono, temperatura, genero, direccion, lugarVisita, nota, Rol_visitante }); 
         req.session.success = true;
     } else {
         const { nombres, cedula, email, telefono, temperatura, genero, direccion, lugarVisita, nota, Rol_visitante } = req.body;

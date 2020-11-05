@@ -16,7 +16,7 @@ const { isAuthenticated, isNotAuthenticated } = require("../helpers/auth");
 
 
 // Routes
-router.get("/users/signup" ,adminAuth, isAuthenticated, renderSignUpForm);
+router.get("/users/signup" , renderSignUpForm);
 
 router.post("/users/signup", [
   
